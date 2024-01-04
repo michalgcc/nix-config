@@ -1,0 +1,14 @@
+[git_hooks.pre-commit]
+script = """
+#!/usr/bin/env bash
+set -e
+./format_code.sh
+"""
+
+[git_hooks.commit-msg]
+script = """
+#!/usr/bin/env bash
+set -e
+cog verify --file $1
+cog check
+"""

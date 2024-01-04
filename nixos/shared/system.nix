@@ -1,0 +1,64 @@
+{ config, pkgs }:
+{
+  services.flatpak.enable = true;
+  services.fstrim.enable = true;
+  services.journald.extraConfig = ''
+    Storage=volatile 
+    RateLimitInterval=30s 
+    RateLimitBurst=10000 
+    RuntimeMaxUse=16M 
+    SystemMaxUse=16M 
+    MaxRetentionSec=1day
+  '';
+
+  # Zram
+  zramSwap.enable = true;
+
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      # dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
+  # Enable libvrt
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.libvirtd.onShutdown = "shutdown";
+
+  # Use wayland in Chromium/electron apps
+  # https://nixos.wiki/wiki/Chromium#Enabling_native_Wayland_support
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Fix Flatpak missing icons and fonts:
+  # https://github.com/NixOS/nixpkgs/issues/119433
+  system.fsPackages = [ pkgs.bindfs ];
+  fileSystems =
+    let
+      mkRoSymBind = path: {
+        device = path;
+        fsType = "fuse.bindfs";
+        options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
+      };
+      aggregatedFonts = pkgs.buildEnv {
+        name = "system-fonts";
+        paths = config.fonts.packages;
+        pathsToLink = [ "/share/fonts" ];
+      };
+    in
+    {
+      # Create an FHS mount to support flatpak host icons/fonts
+      "/usr/share/icons" = mkRoSymBind (config.system.path + "/share/icons");
+      "/usr/share/fonts" = mkRoSymBind (aggregatedFonts + "/share/fonts");
+    };
+
+  # Kernel params
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 0;
+  };
+}
