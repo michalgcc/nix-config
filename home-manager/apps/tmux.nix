@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   # In order to force reload: tmux kill-server
   programs.tmux = {

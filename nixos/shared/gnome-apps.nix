@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   # Appindicator for gnome
   services.udev.packages = with pkgs.gnome; [ gnome-settings-daemon ];

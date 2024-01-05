@@ -1,4 +1,4 @@
-{ pkgs }: {
+{ pkgs, ... }: {
   imports = [
     ./apps/codium.nix
     ./apps/gnome.nix
