@@ -9,4 +9,6 @@
     ];
 
   networking.hostName = "mg-desktop";
+
+  hardware.new-lg4ff.enable = true;
 }
