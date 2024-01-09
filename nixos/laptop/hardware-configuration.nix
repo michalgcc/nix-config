@@ -9,7 +9,7 @@
 #
 # 1. Ext4 has added options "noatime" "commit=60" 
 
-{ config, lib, modulesPath }:
+{ config, lib, modulesPath, ... }:
 
 {
   imports =
