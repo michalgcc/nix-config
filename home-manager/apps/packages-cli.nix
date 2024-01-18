@@ -11,6 +11,7 @@
     nil
     nixpkgs-fmt
     patchelf
+    podman-compose
     ripgrep
     tree
     wget
