@@ -10,9 +10,11 @@
     lazygit
     nil
     nixpkgs-fmt
+    nodejs
     patchelf
     podman-compose
     ripgrep
+    tmuxp
     tree
     wget
     wl-clipboard

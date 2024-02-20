@@ -37,7 +37,7 @@ end
 set -g fish_greeting
 
 # Run tmux if not already running
-[ -z "$TMUX" ] && tmux new -A -s wrk
+[ -z "$TMUX" ] && tmuxp load -y wsl
 
  #  ______                _   _                 
  # |  ____|              | | (_)                
@@ -176,17 +176,10 @@ function notes
 end
 
 function tvim
-    if test -n "$TMUX"
-         tmux send-keys 'vim' C-m \; \
-          split-window -v -l 5 -c '#{pane_current_path}' \; \
-          # Depends on numbering, in default config it should be 0
-          select-pane -t 1
-    else
-        tmux new -A -s wrk \; \
-          send-keys 'vim' C-m \; \
-          split-window -v -l 5 -c '#{pane_current_path}' \; \
-          select-pane -t 1
-    end
+    tmux send-keys 'vim' C-m \; \
+    split-window -v -l 5 -c '#{pane_current_path}' \; \
+    # Depends on numbering, in default config it should be 0
+    select-pane -t 1
 end
 
 function tvi

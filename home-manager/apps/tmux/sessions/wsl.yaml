@@ -1,0 +1,9 @@
+session_name: wsl
+windows:
+  - window_name: default
+  - window_name: wwork
+    shell_command_before:
+      - cd /mnt/c/workspace
+  - window_name: lwork
+    shell_command_before:
+      - cd ~/workspace

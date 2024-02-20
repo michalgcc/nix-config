@@ -58,6 +58,9 @@
       bind l select-pane -R
 
       bind-key ` previous-window
+      
+      # Open new window in the same directory
+      bind  c  new-window      -c "#{pane_current_path}"
     '';
   };
 }
