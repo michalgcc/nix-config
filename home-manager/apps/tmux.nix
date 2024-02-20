@@ -30,8 +30,9 @@
       set -ga terminal-overrides ",*256col*:Tc"
       set -g default-terminal "screen-256color"
 
-      # Fix vim esc delay
-      set -sg escape-time 0
+      # Fix vim esc delay - Changed to resolve https://github.com/microsoft/WSL/issues/5931
+      set -sg escape-time 1
+
       # Don't repeat commands
       set-option -g repeat-time 0
 

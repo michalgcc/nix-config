@@ -7,7 +7,15 @@
  #                                                           __/ |    
  #                                                          |___/     
 
-if grep -qi Microsoft /proc/version
+function is_wsl
+    grep -qi Microsoft /proc/version
+end
+
+function is_windows_filesystem
+    pwd -P | grep -q "^/mnt/c/*"
+end
+
+if is_wsl
     . ~/.nix-profile/etc/profile.d/nix.fish
 end
 
@@ -29,7 +37,7 @@ end
 set -g fish_greeting
 
 # Run tmux if not already running
-[ -z "$TMUX" ] && tmux
+[ -z "$TMUX" ] && tmux new -A -s wrk
 
  #  ______                _   _                 
  # |  ____|              | | (_)                
@@ -40,16 +48,54 @@ set -g fish_greeting
  #                                              
  #                                              
 
+# Adjusted for WSL functions
+
+# Start on Windows
+function s
+    if is_wsl
+        explorer.exe (wslpath -aw $argv)
+    else
+        echo "Not implemented. Implement when there is a use case."
+    end
+end
+
 function c
     if [ (count $argv) -eq 0 ]
         set argv "."
     end
 
-    # Possible solution to multiple instances of codium crashing while maximixing a window
-    # codium --disable-gpu-sandbox $argv &>/dev/null
-    # Original: 
-    codium $argv &>/dev/null
+    if is_wsl
+        code $argv &>/dev/null
+    else
+        codium $argv &>/dev/null
+    end
 end
+
+function ii
+    if is_wsl
+        /mnt/c/Windows/explorer.exe .
+    else
+        nautilus . &>/dev/null &
+    end
+end
+
+function git
+    if is_windows_filesystem
+        git.exe $argv
+    else 
+        command git $argv
+    end
+end
+
+function rg
+    if is_windows_filesystem
+        rg.exe $argv
+    else 
+        command rg $argv
+    end
+end
+
+# Native functions
 
 function cp
     rsync -ah --progress $argv
@@ -61,10 +107,6 @@ end
 
 function clipboard
     wl-copy
-end
-
-function ii
-    nautilus . &>/dev/null &
 end
 
 function git_add_rebase_i
@@ -140,7 +182,7 @@ function tvim
           # Depends on numbering, in default config it should be 0
           select-pane -t 1
     else
-        tmux new-session \; \
+        tmux new -A -s wrk \; \
           send-keys 'vim' C-m \; \
           split-window -v -l 5 -c '#{pane_current_path}' \; \
           select-pane -t 1

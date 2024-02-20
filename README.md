@@ -52,6 +52,14 @@ nix-channel --update
 nix-shell '<home-manager>' -A install
 ./rebuild_cli_nix_home_manager.sh
 
+# Remove Ubuntu git
+sudo apt remove git
+
+# Configure git to use windows credential manager from scoop
+git config --global credential.helper "/mnt/c/Users/a/scoop/apps/git/current/mingw64/bin/git-credential-manager.exe
+
+# Update Windows git config to match Nix 
+Copy paste home-manager/apps/windows.git.config to %USERPROFILE%/.gitconfig
 ```
 # Optional:
 ## Install NerdFont for Windows terminal
