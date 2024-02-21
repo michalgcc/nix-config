@@ -21,6 +21,9 @@
     extraConfig = ''
       set-option -g mouse on
 
+      set -g default-command "/usr/bin/env fish -l"
+      set-option -g update-environment "PATH"
+
       # Set prefix to Ctrl + space
       unbind C-b
       set -g prefix C-space

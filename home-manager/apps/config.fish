@@ -36,8 +36,12 @@ end
 # Disable greeting
 set -g fish_greeting
 
+function work_tmux
+    tmuxp load -y wsl
+end
+
 # Run tmux if not already running
-[ -z "$TMUX" ] && tmuxp load -y wsl
+[ -z "$TMUX" ] && tmux new -A -s dflt
 
  #  ______                _   _                 
  # |  ____|              | | (_)                
@@ -185,3 +189,5 @@ end
 function tvi
     tvim
 end
+
+
