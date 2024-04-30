@@ -15,6 +15,10 @@
     homeDirectory = "/home/mg";
   };
 
+  home.sessionVariables = {
+    TMUX_TMPDIR = pkgs.lib.mkForce "/tmp";
+  };
+
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];

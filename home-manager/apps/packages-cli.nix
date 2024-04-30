@@ -33,6 +33,8 @@
     vifm
     wireguard-tools
     yt-dlp
+    lynx
+    pdfgrep
     # media
     ffmpeg-full
     somafm-cli
