@@ -29,6 +29,21 @@ function GitAddAmendNoEditForcePush {
     git add -A && git commit --no-verify --amend --no-edit && git push --force-with-lease 
 }
 
+function GitPullWithSubmodules {
+    git pull --recursive-submodules
+}
+
 function KillWSL {
     wsl --shutdown
+}
+
+Remove-Alias rm
+function rm {
+    Remove-Item -Recurse -Force $args
+}
+
+function cdw {
+    # Set env variable PsCdwDir - Change Directory Work
+    # [Environment]::SetEnvironmentVariable("PsCdwDir", "C:\workspace", [System.EnvironmentVariableTarget]::User)
+    cd $Env:PsCdwDir
 }

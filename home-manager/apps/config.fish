@@ -191,4 +191,4 @@ function tvi
     tvim
 end
 
-
+alias rm "rm -rf"
