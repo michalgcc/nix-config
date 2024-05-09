@@ -41,7 +41,8 @@ function work_tmux
 end
 
 # Run tmux if not already running
-[ -z "$TMUX" ] && tmux new -A -s dflt
+# Disabled for now
+# [ -z "$TMUX" ] && tmux new -A -s dflt
 
  #  ______                _   _                 
  # |  ____|              | | (_)                
@@ -118,7 +119,7 @@ function git_add_rebase_i
 end
 
 function git_add_amend_no_edit_force_push
-    git add -A && git commit --no-verify --amend --no-edit && git push --force
+    git add -A && git commit --no-verify --amend --no-edit && git push --force-with-lease
 end
 
 function git_reset_hard

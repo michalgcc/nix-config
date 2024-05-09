@@ -37,7 +37,7 @@ chmod 600 "$destination_dir/id_rsa"
 chmod 644 "$destination_dir/id_rsa.pub"
 ```
 
-## Installing on Ubuntu and possibly WSL2 with Nix:
+## Installing on Ubuntu and WSL2:
 
 ```
 sudo apt install git curl
@@ -55,7 +55,7 @@ nix-shell '<home-manager>' -A install
 # Remove Ubuntu git
 sudo apt remove git
 
-# Configure git to use windows credential manager from scoop
+# Configure git to use windows credential manager from scoop (scoop install git)
 git config --global credential.helper "/mnt/c/Users/a/scoop/apps/git/current/mingw64/bin/git-credential-manager.exe
 
 # Update Windows git config to match Nix 
