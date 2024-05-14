@@ -25,12 +25,41 @@ function C {
     code $args
 }
 
+Remove-Alias -Force ii 
+function ii {
+    param (
+        [Parameter(ValueFromRemainingArguments=$true)]
+        $args
+    )
+
+    if ($args.Count -eq 0) {
+        $args = "."
+    }
+
+    Invoke-Item $args
+}
+
 function GitAddAmendNoEditForcePush {
     git add -A && git commit --no-verify --amend --no-edit && git push --force-with-lease 
 }
 
 function GitPullWithSubmodules {
-    git pull --recursive-submodules
+    git pull --recurse-submodules
+}
+
+function GitFetchSrcToDstAndRebase {
+    param (
+        [ArgumentCompletions('develop', 'main')]
+        [string]$branchName
+    )
+
+    git fetch origin ${branchName}:${branchName}
+    git rebase ${branchName}
+}
+
+function GitCleanCheckout {
+    git clean -f
+    git checkout -- $(git ls-files -m)
 }
 
 function KillWSL {
