@@ -62,13 +62,17 @@ function GitCleanCheckout {
     git checkout -- $(git ls-files -m)
 }
 
-function KillWSL {
-    wsl --shutdown
+if ($IsWindows) {
+    function KillWSL {
+        wsl --shutdown
+    }
 }
 
-Remove-Alias rm
-function rm {
-    Remove-Item -Recurse -Force $args
+if ($IsWindows) {
+    Remove-Alias rm
+    function rm {
+        Remove-Item -Recurse -Force $args
+    }
 }
 
 function cdw {
@@ -77,11 +81,13 @@ function cdw {
     cd $Env:PsCdwDir
 }
 
-function DisableDeviceWake {
-    $devices = powercfg /DEVICEQUERY wake_armed
+if ($IsWindows) {
+    function DisableDeviceWake {
+        $devices = powercfg /DEVICEQUERY wake_armed
 
-    foreach ($device in $devices)
-    {
-        powercfg /DEVICEDISABLEWAKE "$device"
+        foreach ($device in $devices)
+        {
+            powercfg /DEVICEDISABLEWAKE "$device"
+        }
     }
 }

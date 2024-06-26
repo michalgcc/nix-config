@@ -14,6 +14,7 @@
     nodejs
     patchelf
     podman-compose
+    powershell
     rename
     ripgrep
     tmuxp
