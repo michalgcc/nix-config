@@ -76,3 +76,12 @@ function cdw {
     # [Environment]::SetEnvironmentVariable("PsCdwDir", "C:\workspace", [System.EnvironmentVariableTarget]::User)
     cd $Env:PsCdwDir
 }
+
+function DisableDeviceWake {
+    $devices = powercfg /DEVICEQUERY wake_armed
+
+    foreach ($device in $devices)
+    {
+        powercfg /DEVICEDISABLEWAKE "$device"
+    }
+}

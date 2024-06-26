@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     # dev
     bintools
+    detox
     dive
     fzf
     gdb
@@ -13,6 +14,7 @@
     nodejs
     patchelf
     podman-compose
+    rename
     ripgrep
     tmuxp
     tree

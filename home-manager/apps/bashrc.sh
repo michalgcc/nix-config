@@ -2,7 +2,7 @@
 if [[ $(grep -i Microsoft /proc/version) ]]; then
     . ~/.nix-profile/etc/profile.d/nix.sh
     # Change shell to fish
-    fish
+    # fish
 fi
 
 # Obsolete:

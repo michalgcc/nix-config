@@ -100,6 +100,14 @@ function rg
     end
 end
 
+function ssh
+    if is_wsl
+        ssh.exe $argv
+    else 
+        command ssh $argv
+    end
+end
+
 # Native functions
 
 function cp
