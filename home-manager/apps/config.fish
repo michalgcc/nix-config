@@ -31,6 +31,10 @@ end
  # Powerline-go prompt
 function fish_prompt
     eval powerline-go -error $status -jobs (count (jobs -p))
+
+    if test -n "$container"
+        echo -n "📦 "
+    end
 end
 
 # Disable greeting

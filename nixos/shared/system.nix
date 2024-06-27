@@ -30,6 +30,8 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirtd.onShutdown = "shutdown";
+  services.spice-vdagentd.enable = true;
+
 
   # Use wayland in Chromium/electron apps
   # https://nixos.wiki/wiki/Chromium#Enabling_native_Wayland_support
@@ -45,6 +47,14 @@
         fsType = "fuse.bindfs";
         options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
       };
+      aggregatedIcons = pkgs.buildEnv {
+        name = "system-icons";
+        paths = with pkgs; [
+          #libsForQt5.breeze-qt5  # for plasma
+          gnome.gnome-themes-extra
+        ];
+        pathsToLink = [ "/share/icons" ];
+      };
       aggregatedFonts = pkgs.buildEnv {
         name = "system-fonts";
         paths = config.fonts.packages;
@@ -52,10 +62,18 @@
       };
     in
     {
-      # Create an FHS mount to support flatpak host icons/fonts
-      "/usr/share/icons" = mkRoSymBind (config.system.path + "/share/icons");
-      "/usr/share/fonts" = mkRoSymBind (aggregatedFonts + "/share/fonts");
+      "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
+      "/usr/local/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
     };
+
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-emoji
+      noto-fonts-cjk
+    ];
+  };
 
   # Kernel params
   boot.kernel.sysctl = {

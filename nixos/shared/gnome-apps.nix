@@ -1,26 +1,28 @@
 { pkgs, ... }:
 {
-  # Appindicator for gnome
-  services.udev.packages = with pkgs.gnome; [ gnome-settings-daemon ];
+  # Switched to KDE for now
 
-  environment.systemPackages = with pkgs; [
-    gnome.pomodoro
-    gnomeExtensions.appindicator
-    gnomeExtensions.espresso
-  ];
+  # # Appindicator for gnome
+  # services.udev.packages = with pkgs.gnome; [ gnome-settings-daemon ];
 
-  # Exclude gnome packages
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    gnome-music
-    gnome-terminal
-    epiphany
-    geary
-    gnome-characters
-    tali
-    iagno
-    hitori
-    atomix
-  ]);
+  # environment.systemPackages = with pkgs; [
+  #   gnome.pomodoro
+  #   gnomeExtensions.appindicator
+  #   gnomeExtensions.espresso
+  # ];
+
+  # # Exclude gnome packages
+  # environment.gnome.excludePackages = (with pkgs; [
+  #   gnome-tour
+  # ]) ++ (with pkgs.gnome; [
+  #   gnome-music
+  #   gnome-terminal
+  #   epiphany
+  #   geary
+  #   gnome-characters
+  #   tali
+  #   iagno
+  #   hitori
+  #   atomix
+  # ]);
 }

@@ -25,6 +25,10 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./nixos/desktop/configuration.nix ];
         };
+        mg-t14gen1i = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./nixos/t14gen1i/configuration.nix ];
+        };
       };
 
       homeConfigurations = {

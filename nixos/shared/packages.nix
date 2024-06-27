@@ -8,6 +8,4 @@
     virtiofsd
     vanilla-dmz
   ];
-
-  programs.steam.enable = true;
 }

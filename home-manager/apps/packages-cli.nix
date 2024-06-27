@@ -4,6 +4,7 @@
     bintools
     detox
     dive
+    distrobox
     fzf
     gdb
     grc
