@@ -8,4 +8,8 @@
     virtiofsd
     vanilla-dmz
   ];
+
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
+  programs.ssh.startAgent = true;
 }

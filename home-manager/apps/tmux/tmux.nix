@@ -19,14 +19,20 @@
     # Copied text will be also available in system clipboard.
 
     extraConfig = ''
-        # Fix nvim color
-        set -ga terminal-overrides ",*256col*:Tc"
-        set -g default-terminal "screen-256color"
+      # Fix nvim color
+      set -ga terminal-overrides ",*256col*:Tc"
+      set -g default-terminal "screen-256color"
 
-        # Fix vim esc delay - Changed to resolve https://github.com/microsoft/WSL/issues/5931
-        set -sg escape-time 1
+      # Fix vim esc delay - Changed to resolve https://github.com/microsoft/WSL/issues/5931
+      set -sg escape-time 1
 
-      #   set-option -g mouse on
+      # Don't repeat commands
+      set-option -g repeat-time 0
+
+      set-option -g mouse on
+
+      # Disable right click menu
+      unbind -n MouseDown3Pane
 
       #   set -g default-command "/usr/bin/env fish -l"
       #   set-option -g update-environment "PATH"
@@ -35,9 +41,6 @@
       #   unbind C-b
       #   set -g prefix C-space
       #   bind C-space send-prefix
-
-      #   # Don't repeat commands
-      #   set-option -g repeat-time 0
 
       #   # Disable confirmation prompt
       #   bind-key x kill-pane

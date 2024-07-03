@@ -45,8 +45,7 @@ function work_tmux
 end
 
 # Run tmux if not already running
-# Disabled for now
-# [ -z "$TMUX" ] && tmux new -A -s dflt
+[ -z "$TMUX" ] && tmux new -A -s dflt
 
  #  ______                _   _                 
  # |  ____|              | | (_)                

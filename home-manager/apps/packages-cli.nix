@@ -10,6 +10,7 @@
     grc
     jq
     lazygit
+    mtr
     nil
     nixpkgs-fmt
     nodejs
@@ -32,7 +33,7 @@
     # non dev
     btop
     gocryptfs
-    neofetch
+    fastfetch
     qrencode
     vifm
     wireguard-tools
