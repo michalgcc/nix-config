@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     # dev
+    blesh
     bintools
     detox
     dive

@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   programs.fish = {
-    enable = true;
+    enable = false;
     interactiveShellInit = builtins.readFile ./config.fish;
     plugins = [
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }

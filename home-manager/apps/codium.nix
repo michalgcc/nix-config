@@ -19,22 +19,22 @@
       # dhall.dhall-lang
       # dhall.vscode-dhall-lsp-server
     ]
-      # ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      #   # In order to retrieve correct sha during build set:
-      #   # sha256 = "0000000000000000000000000000000000000000000000000000";
-      #   {
-      #     name = "ide-purescript";
-      #     publisher = "nwolverson";
-      #     version = "0.26.2";
-      #     sha256 = "72DRp+XLPlOowkRqyCWAeU/MNUr01m39IkCHCm5zpVc=";
-      #   }
-      #   {
-      #     name = "language-purescript";
-      #     publisher = "nwolverson";
-      #     version = "0.2.8";
-      #     sha256 = "2uOwCHvnlQQM8s8n7dtvIaMgpW8ROeoUraM02rncH9o=";
-      #   }
-      # ]
+    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      # In order to retrieve correct sha during build set:
+      # sha256 = "0000000000000000000000000000000000000000000000000000";
+      {
+        name = "ng-template";
+        publisher = "Angular";
+        version = "18.1.2";
+        sha256 = "F1Y4nuelfr9YX2odU7WPvYAEMpr+e3h48HI3a5hMtEE=";
+      }
+      # {
+      #   name = "language-purescript";
+      #   publisher = "nwolverson";
+      #   version = "0.2.8";
+      #   sha256 = "2uOwCHvnlQQM8s8n7dtvIaMgpW8ROeoUraM02rncH9o=";
+      # }
+    ]
     ;
     userSettings =
       {
@@ -62,6 +62,7 @@
         "extensions.autoCheckUpdates" = false;
         "extensions.autoUpdate" = false;
         "terminal.integrated.gpuAcceleration" = "on";
+        "git.openRepositoryInParentFolders" = "always";
       };
   };
 }
