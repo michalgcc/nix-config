@@ -18,6 +18,7 @@
       # Dhall
       # dhall.dhall-lang
       # dhall.vscode-dhall-lsp-server
+      golang.go
     ]
     ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       # In order to retrieve correct sha during build set:
