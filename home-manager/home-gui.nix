@@ -2,6 +2,7 @@
   imports = [
     ./apps/codium.nix
     ./apps/gnome.nix
+    ./apps/kitty.nix
     ./apps/kde.nix
     ./apps/packages-gui.nix
     ./apps/wezterm.nix
