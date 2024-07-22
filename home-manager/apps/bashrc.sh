@@ -69,7 +69,15 @@ cp() {
 }
 
 ii() {
-    (nautilus . &>/dev/null &)
+    if [ -z "$*" ]; then
+        set -- "."
+    fi
+
+    if is_wsl; then
+        explorer.exe "$@"
+    else
+        (dolphin "$@" &>/dev/null &)
+    fi
 }
 
 c() {
@@ -77,7 +85,11 @@ c() {
         set -- "."
     fi
 
-    command codium "$@" &>/dev/null
+    if is_wsl; then
+        code "$@" &>/dev/null
+    else
+        command codium "$@" &>/dev/null
+    fi
 }
 
 s() {
