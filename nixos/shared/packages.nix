@@ -12,4 +12,10 @@
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
   programs.ssh.startAgent = true;
+
+  # KDE excluded packages
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    konsole
+  ];
+  programs.kdeconnect.enable = true;
 }

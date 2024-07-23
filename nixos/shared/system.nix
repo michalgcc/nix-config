@@ -39,6 +39,8 @@
 
   # Fix Flatpak missing icons and fonts:
   # https://github.com/NixOS/nixpkgs/issues/119433
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
   system.fsPackages = [ pkgs.bindfs ];
   fileSystems =
     let
@@ -50,8 +52,7 @@
       aggregatedIcons = pkgs.buildEnv {
         name = "system-icons";
         paths = with pkgs; [
-          #libsForQt5.breeze-qt5  # for plasma
-          gnome.gnome-themes-extra
+          kdePackages.breeze
         ];
         pathsToLink = [ "/share/icons" ];
       };

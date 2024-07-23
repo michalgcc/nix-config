@@ -86,7 +86,11 @@ c() {
     fi
 
     if is_wsl; then
-        code "$@" &>/dev/null
+        if is_windows_filesystem; then
+            cmd.exe /c code.cmd $(wslpath -aw "$@")
+        else
+            code "$@" &>/dev/null
+        fi
     else
         command codium "$@" &>/dev/null
     fi
@@ -94,7 +98,7 @@ c() {
 
 s() {
     if is_wsl; then
-        explorer.exe "$(wslpath -aw "$@")"
+        explorer.exe "$(wslpath -aw "$@")" || return 0
     else
         echo "Not implemented. Implement when there is a use case."
     fi

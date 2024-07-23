@@ -1,23 +1,7 @@
-{ pkgs, ... }:
 {
   # In order to force reload: tmux kill-server
   programs.tmux = {
     enable = true;
-
-    plugins = with pkgs; [
-      # tmuxPlugins.better-mouse-mode
-
-      # Default binding is Prefix + u
-      # tmuxPlugins.fzf-tmux-url
-    ];
-
-    # Mouse select and copy:
-    #
-    # Hold Shift while selecting text with mouse. 
-    # Now you get a standard right-click menu (keep holding or press Shift again).
-    # and you can use Ctrl+Shift+C and Ctrl+Shift+V to copy and paste.
-    # Copied text will be also available in system clipboard.
-
     extraConfig = ''
       # Fix nvim color
       set -ga terminal-overrides ",*256col*:Tc"
@@ -34,39 +18,8 @@
       # Disable right click menu
       unbind -n MouseDown3Pane
 
-      #   set -g default-command "/usr/bin/env fish -l"
-      #   set-option -g update-environment "PATH"
-
-      #   # Set prefix to Ctrl + space
-      #   unbind C-b
-      #   set -g prefix C-space
-      #   bind C-space send-prefix
-
-      #   # Disable confirmation prompt
-      #   bind-key x kill-pane
-
-      #   bind-key k confirm-before kill-session
-
-      #   # Open a small vertical terminal, useful in vim
-      #   bind-key '\' split-window -v -l 10 -c "#{pane_current_path}"
-
-      #   # Start windows and panes at 1, not 0
-      #   set -g base-index 1
-      #   setw -g pane-base-index 1
-
-      #   # Ensure window index numbers get reordered on delete.
-      #   set-option -g renumber-windows on
- 
-      #   # Use vim keys to move panes
-      #   bind h select-pane -L
-      #   bind j select-pane -D
-      #   bind k select-pane -U
-      #   bind l select-pane -R
-
-      #   bind-key ` previous-window
-      
-      #   # Open new window in the same directory
-      #   bind  c  new-window      -c "#{pane_current_path}"
+      set -g automatic-rename-format '#{pane_current_path}'
+      set -g status-interval 5
     '';
   };
 }

@@ -47,13 +47,9 @@
 
   services.xserver.enable = true;
 
-  # Gnome:
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
   # KDE:
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
-  programs.kdeconnect.enable = true;
 
   services.xserver.xkb = {
     layout = "us";
@@ -87,7 +83,6 @@
     packages = with pkgs; [
       home-manager
     ];
-    # shell = pkgs.fish;
   };
 
   nixpkgs.config.allowUnfree = true;
