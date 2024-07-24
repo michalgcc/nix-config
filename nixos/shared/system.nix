@@ -73,7 +73,7 @@
       # noto-fonts
       # noto-fonts-emoji
       # noto-fonts-cjk
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (nerdfonts.override { fonts = [ "Hack" ]; })
     ];
   };
 

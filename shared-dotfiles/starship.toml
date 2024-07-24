@@ -1,0 +1,32 @@
+format = """
+$directory\
+[](fg:#a3aed2 bg:#394260)\
+$git_branch\
+$git_status\
+\n$character"""
+
+[directory]
+style = "fg:#090c0c bg:#a3aed2"
+format = "[ $path ]($style)"
+truncation_length = 0
+truncation_symbol = "…/"
+truncate_to_repo = false
+
+[git_branch]
+symbol = ""
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+
+[git_status]
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind)](fg:#769ff0 bg:#394260)[](fg:#394260)]($style)'
+stashed = '\$${count} '
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕${count} "
+conflicted = "=${count} "
+deleted = "✘${count} "
+renamed = "»${count} "
+modified = "!${count} "
+staged = "+${count} "
+untracked = "?${count} "

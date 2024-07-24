@@ -10,4 +10,5 @@
     ./dotfiles.nix
   ];
 
+  programs.starship.enable = true;
 }

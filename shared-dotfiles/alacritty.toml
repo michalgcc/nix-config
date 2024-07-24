@@ -32,7 +32,21 @@ white   = '#acb0d0'
 size = 11.0
 
 [font.normal]
-family="JetBrainsMono Nerd Font"
+family="Hack Nerd Font Mono"
+style="Regular"
+
+[font.bold]
+family="Hack Nerd Font Mono"
+style="Bold"
+
+[font.italic]
+family="Hack Nerd Font Mono"
+style="Italic"
+
+[font.bold_italic]
+family="Hack Nerd Font Mono"
+style="Bold Italic"
+
 
 [window]
 startup_mode = "Maximized"

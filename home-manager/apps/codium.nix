@@ -64,6 +64,7 @@
         "extensions.autoUpdate" = false;
         "terminal.integrated.gpuAcceleration" = "on";
         "git.openRepositoryInParentFolders" = "always";
+        "editor.fontFamily" = "'Hack Nerd Font Mono'";
       };
   };
 }

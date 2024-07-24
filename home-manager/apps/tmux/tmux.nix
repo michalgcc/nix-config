@@ -18,8 +18,7 @@
       # Disable right click menu
       unbind -n MouseDown3Pane
 
-      set -g automatic-rename-format '#{pane_current_path}'
-      set -g status-interval 5
+      set-window-option -g window-status-current-style bg=blue
     '';
   };
 }

@@ -60,7 +60,7 @@ prepend_or_remove_wsl_mnt_override_path() {
     fi
 }
 
-PROMPT_COMMAND='prepend_or_remove_wsl_mnt_override_path && PS1="$(powerline-go -hostname-only-if-ssh; [ -n "$container" ] && echo "📦 \n"; [ -z "$container" ] && echo "\n")"; echo -ne "\033]0;$(pwd)\007"'
+PROMPT_COMMAND='prepend_or_remove_wsl_mnt_override_path'
 
 [ -z "$TMUX" ] && tmux new -A -s dflt
 
@@ -122,26 +122,26 @@ clipboard() {
     wl-copy
 }
 
-git_add_rebase_i() {
-    git add -A && git commit -m "x" && git rebase -i HEAD~2
-}
+# git_add_rebase_i() {
+#     git add -A && git commit -m "x" && git rebase -i HEAD~2
+# }
 
-git_add_amend_no_edit_force_push() {
-    git add -A && git commit --no-verify --amend --no-edit && git push --force-with-lease
-}
+# git_add_amend_no_edit_force_push() {
+#     git add -A && git commit --no-verify --amend --no-edit && git push --force-with-lease
+# }
 
-git_reset_hard() {
-    git reset --hard "@{u}"
-}
+# git_reset_hard() {
+#     git reset --hard "@{u}"
+# }
 
-git_fetch_reset() {
-    git fetch
-    git reset --hard "@{u}"
-}
+# git_fetch_reset() {
+#     git fetch
+#     git reset --hard "@{u}"
+# }
 
-git_pull_all() {
-    find . -maxdepth 2 -type d -name .git -execdir git pull \;
-}
+# git_pull_all() {
+#     find . -maxdepth 2 -type d -name .git -execdir git pull \;
+# }
 
 qransiencode() {
     echo "Paste what you want to generate as QR and confirm with Enter + CTRL + D"
@@ -155,6 +155,7 @@ unlock_remote_server_luks() {
     done
 }
 
+eval "$(starship init bash)"
 # For direnv with ble-sh
 if ! is_wsl; then
     eval "$(direnv hook bash)"

@@ -62,19 +62,14 @@ git config --global credential.helper "/mnt/c/Users/a/scoop/apps/git/current/min
 Copy paste home-manager/apps/windows.git.config to %USERPROFILE%/.gitconfig
 ```
 # Optional:
-## Install NerdFont for Windows terminal
+## Install NerdFont for Alacritty on Windows
 
 Download the latest version of 
-JetBrainsMono.zip from https://github.com/ryanoasis/nerd-fonts/releases
-Unzip and install JetBrainsMonoNerdFontMono-Regular.ttf
-
-In terminal apperance setting set Font face to: `JetBrainsMono Nerd Font Mono`
-
-Install wezterm for proper fonts handling
+Hack.zip from https://github.com/ryanoasis/nerd-fonts/releases
+Unzip and install `HackNerdFontMono-BoldItalic.ttf  HackNerdFontMono-Bold.ttf  HackNerdFontMono-Italic.ttf  HackNerdFontMono-Regular.ttf`
 ```
 sudo apt install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub org.wezfurlong.wezterm
 ```
 
 ## Updating flake lock file
