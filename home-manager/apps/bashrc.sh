@@ -1,6 +1,10 @@
 # Must be on start
 source "$(blesh-share)"/ble.sh --attach=none # does not work currently
 
+# Better ctrl + backspace line erase
+stty werase undef
+bind '\C-w:unix-filename-rubout'
+
 wsl_mnt_override="$HOME/.config/wsl_mnt_override/"
 
 link_wsl_exe() {
