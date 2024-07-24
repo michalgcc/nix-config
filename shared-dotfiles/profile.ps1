@@ -39,28 +39,28 @@ function ii {
     Invoke-Item $args
 }
 
-function GitAddAmendNoEditForcePush {
-    git add -A && git commit --no-verify --amend --no-edit && git push --force-with-lease 
-}
+# function GitAddAmendNoEditForcePush {
+#     git add -A && git commit --no-verify --amend --no-edit && git push --force-with-lease 
+# }
 
-function GitPullWithSubmodules {
-    git pull --recurse-submodules
-}
+# function GitPullWithSubmodules {
+#     git pull --recurse-submodules
+# }
 
-function GitFetchSrcToDstAndRebase {
-    param (
-        [ArgumentCompletions('develop', 'main')]
-        [string]$branchName
-    )
+# function GitFetchSrcToDstAndRebase {
+#     param (
+#         [ArgumentCompletions('develop', 'main')]
+#         [string]$branchName
+#     )
 
-    git fetch origin ${branchName}:${branchName}
-    git rebase ${branchName}
-}
+#     git fetch origin ${branchName}:${branchName}
+#     git rebase ${branchName}
+# }
 
-function GitCleanCheckout {
-    git clean -f
-    git checkout -- $(git ls-files -m)
-}
+# function GitCleanCheckout {
+#     git clean -f
+#     git checkout -- $(git ls-files -m)
+# }
 
 if ($IsWindows) {
     function KillWSL {
