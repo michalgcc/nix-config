@@ -19,6 +19,13 @@
       unbind -n MouseDown3Pane
 
       set-window-option -g window-status-current-style bg=blue
+
+      # display of active window
+      set -g window-status-current-format '#{window_index} #{b:pane_current_path}*'
+      # display of all other windows
+      set -g window-status-format '#{window_index} #{b:pane_current_path}'
+      #  make sure to update the window title every 5 seconds
+      set -g status-interval 5
     '';
   };
 }

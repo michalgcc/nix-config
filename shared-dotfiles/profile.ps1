@@ -1,6 +1,5 @@
 # Initial setup:
 # Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
-# PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 
 # Windows when repo is inside WSL:
 # Edit profile.ps1 "code $PROFILE.CurrentUserAllHosts"
@@ -10,7 +9,6 @@
 
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 Set-PSReadlineOption -BellStyle None
-Import-Module posh-git
 
 function C {
     param (

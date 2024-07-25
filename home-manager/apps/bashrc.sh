@@ -51,7 +51,12 @@ remove_path() {
 if is_wsl; then
     . ~/.nix-profile/etc/profile.d/nix.sh
     link_wsl_exe "git.exe" "git"
+    link_wsl_exe "gitk.exe" "gitk"
     link_wsl_exe "rg.exe" "rg"
+    PATH=$(echo $PATH | sed 's/:/\n/g' | grep -P '^(?!\/mnt\/c\/(?!.*scoop\/shims.*$|.*PowerShell.*$|.*VS.Code.*$)).*' | sed -z 's/\n/:/g;s/:$//')
+
+    alias explorer.exe="/mnt/c/Windows/explorer.exe"
+    alias cmd.exe="/mnt/c/Windows/system32/cmd.exe"
 fi
 
 prepend_or_remove_wsl_mnt_override_path() {
@@ -64,6 +69,7 @@ prepend_or_remove_wsl_mnt_override_path() {
     fi
 }
 
+starship_precmd_user_func='prepend_or_remove_wsl_mnt_override_path'
 PROMPT_COMMAND='prepend_or_remove_wsl_mnt_override_path'
 
 [ -z "$TMUX" ] && tmux new -A -s dflt
