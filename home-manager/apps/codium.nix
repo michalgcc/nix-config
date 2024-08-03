@@ -1,45 +1,20 @@
 { pkgs, ... }: {
   programs.vscode = {
     enable = true;
-    package = pkgs.unstable.vscodium;
+    package = pkgs.unstable.vscodium-fhs;
     extensions = with pkgs.unstable.vscode-extensions; [
       vscodevim.vim
-      # Elm
-      # elmtooling.elm-ls-vscode
-      # Haskell
-      # haskell.haskell
-      # justusadam.language-haskell
       # Nix
       jnoortheen.nix-ide
       # Rust
-      # rust-lang.rust-analyzer
-      # vadimcn.vscode-lldb
-      # serayuzgur.crates
-      # Dhall
-      # dhall.dhall-lang
-      # dhall.vscode-dhall-lsp-server
-      golang.go
-    ]
-    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      # In order to retrieve correct sha during build set:
-      # sha256 = "0000000000000000000000000000000000000000000000000000";
-      {
-        name = "ng-template";
-        publisher = "Angular";
-        version = "18.1.2";
-        sha256 = "F1Y4nuelfr9YX2odU7WPvYAEMpr+e3h48HI3a5hMtEE=";
-      }
-      # {
-      #   name = "language-purescript";
-      #   publisher = "nwolverson";
-      #   version = "0.2.8";
-      #   sha256 = "2uOwCHvnlQQM8s8n7dtvIaMgpW8ROeoUraM02rncH9o=";
-      # }
-    ]
-    ;
+      rust-lang.rust-analyzer
+      vadimcn.vscode-lldb
+      serayuzgur.crates
+    ];
     userSettings =
       {
         "editor.renderWhitespace" = "all";
+        "editor.lineNumbers" = "relative";
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
         # "haskell.manageHLS" = "PATH";

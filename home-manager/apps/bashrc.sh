@@ -132,26 +132,9 @@ clipboard() {
     wl-copy
 }
 
-# git_add_rebase_i() {
-#     git add -A && git commit -m "x" && git rebase -i HEAD~2
-# }
-
-# git_add_amend_no_edit_force_push() {
-#     git add -A && git commit --no-verify --amend --no-edit && git push --force-with-lease
-# }
-
-# git_reset_hard() {
-#     git reset --hard "@{u}"
-# }
-
-# git_fetch_reset() {
-#     git fetch
-#     git reset --hard "@{u}"
-# }
-
-# git_pull_all() {
-#     find . -maxdepth 2 -type d -name .git -execdir git pull \;
-# }
+s() {
+    git status
+}
 
 qransiencode() {
     echo "Paste what you want to generate as QR and confirm with Enter + CTRL + D"
