@@ -23,7 +23,10 @@ function C {
     code $args
 }
 
-Remove-Alias -Force ii 
+if ($IsWindows) {
+    Remove-Alias -Force ii
+}
+
 function ii {
     param (
         [Parameter(ValueFromRemainingArguments=$true)]

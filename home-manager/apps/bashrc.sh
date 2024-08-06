@@ -106,7 +106,7 @@ c() {
     fi
 }
 
-s() {
+e() {
     if is_wsl; then
         explorer.exe "$(wslpath -aw "$@")" || return 0
     else
@@ -122,6 +122,18 @@ ssh() {
     fi
 }
 
+s() {
+    git status
+}
+
+pwsh() {
+    if is_wsl; then
+        pwsh.exe "$@"
+    else
+        command pwsh "$@"
+    fi
+}
+
 # Native functions
 
 search() {
@@ -130,10 +142,6 @@ search() {
 
 clipboard() {
     wl-copy
-}
-
-s() {
-    git status
 }
 
 qransiencode() {
