@@ -6,7 +6,7 @@
       ../shared-conf.nix
       # When extra power is needed for immich:
       # ./immich-machine-learning.nix.nix
-      ../lutris.nix
+      ../shared/lutris.nix
     ];
 
   networking.hostName = "mg-desktop";

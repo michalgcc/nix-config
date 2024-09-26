@@ -28,11 +28,11 @@ flatpak uninstall flathub com.spotify.Client
 flatpak install flathub com.github.tchx84.Flatseal
 
 flatpak install flathub org.mozilla.firefox
-
+flatpak override --user --talk-name=org.freedesktop.ScreenSaver org.mozilla.firefox
 flatpak override --user --env=MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
 
 # Needed for mp4 playback in Firefox
-flatpak install flathub org.freedesktop.Platform.ffmpeg-full/x86_64/23.08
+flatpak install flathub org.freedesktop.Platform.ffmpeg-full/x86_64/24.08
 
 # flatpak install md.obsidian.Obsidian
 

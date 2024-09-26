@@ -36,6 +36,7 @@
   # Use wayland in Chromium/electron apps
   # https://nixos.wiki/wiki/Chromium#Enabling_native_Wayland_support
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "auto";
 
   # Fix Flatpak missing icons and fonts:
   # https://github.com/NixOS/nixpkgs/issues/119433
