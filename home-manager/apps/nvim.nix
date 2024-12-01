@@ -15,7 +15,7 @@
       vimPlugins.coc-html
       vimPlugins.coc-json
       vimPlugins.coc-prettier
-      vimPlugins.coc-tslint
+      vimPlugins.coc-eslint
       vimPlugins.coc-tsserver
       vimPlugins.coc-rust-analyzer
       # Language plugins

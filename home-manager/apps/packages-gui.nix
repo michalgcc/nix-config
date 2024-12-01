@@ -3,5 +3,7 @@
     nextcloud-client
     gimp
     jellyfin-media-player
+    unstable.godot_4
+    gparted
   ];
 }

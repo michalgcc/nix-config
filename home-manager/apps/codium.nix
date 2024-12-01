@@ -40,6 +40,7 @@
         "terminal.integrated.gpuAcceleration" = "on";
         "git.openRepositoryInParentFolders" = "always";
         "editor.fontFamily" = "'Hack Nerd Font Mono'";
+        "godotTools.editorPath.godot4" = "godot4";
       };
   };
 }

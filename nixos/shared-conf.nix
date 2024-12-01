@@ -63,7 +63,6 @@
   # for a WiFi printer
   services.avahi.openFirewall = true;
 
-  sound.enable = true;
   security.rtkit.enable = true;
 
   hardware.bluetooth.enable = true;

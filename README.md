@@ -47,7 +47,7 @@ curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 # Logout and login
 
 # Install home-manager
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz home-manager
 nix-channel --update
 nix-shell '<home-manager>' -A install
 ./rebuild_cli_nix_home_manager.sh
