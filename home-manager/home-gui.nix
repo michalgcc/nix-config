@@ -4,6 +4,7 @@
     ./apps/kde.nix
     ./apps/packages-gui.nix
     ./home-cli.nix
+    ./apps/packages-programming.nix
   ];
 
   programs.alacritty.enable = true;

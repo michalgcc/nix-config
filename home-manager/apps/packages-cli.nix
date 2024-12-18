@@ -20,6 +20,7 @@
     powershell
     rename
     ripgrep
+
     tmuxp
     tree
     wget

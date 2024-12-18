@@ -1,5 +1,6 @@
 # Must be on start
 source "$(blesh-share)"/ble.sh --attach=none # does not work currently
+set -o vi
 
 # Better ctrl + backspace line erase
 stty werase undef
