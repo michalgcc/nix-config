@@ -54,6 +54,7 @@ if is_wsl; then
     link_wsl_exe "git.exe" "git"
     link_wsl_exe "gitk.exe" "gitk"
     link_wsl_exe "rg.exe" "rg"
+    link_wsl_exe "lazygit.exe" "lazygit"
     PATH=$(echo $PATH | sed 's/:/\n/g' | grep -P '^(?!\/mnt\/c\/(?!.*scoop\/shims.*$|.*PowerShell.*$|.*VS.Code.*$)).*' | sed -z 's/\n/:/g;s/:$//')
 
     alias explorer.exe="/mnt/c/Windows/explorer.exe"
@@ -73,7 +74,9 @@ prepend_or_remove_wsl_mnt_override_path() {
 starship_precmd_user_func='prepend_or_remove_wsl_mnt_override_path'
 PROMPT_COMMAND='prepend_or_remove_wsl_mnt_override_path'
 
-[ -z "$TMUX" ] && tmux new -A -s dflt
+tmuxd() {
+    [ -z "$TMUX" ] && tmux new -A -s dflt
+}
 
 cp() {
     rsync -ah --progress $@

@@ -1,4 +1,5 @@
 format = """
+$container\
 $directory\
 [](fg:#a3aed2 bg:#394260)\
 $git_branch\

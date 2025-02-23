@@ -1,14 +1,24 @@
 # Initial setup:
 # Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
+# PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 
 # Windows when repo is inside WSL:
 # Edit profile.ps1 "code $PROFILE.CurrentUserAllHosts"
-# Add the following, remember to replace <uname>
-# # cp \\wsl.localhost\Ubuntu\home\<uname>\workspace\nix-config\shared-dotfiles\profile.ps1 ~/current.ps1
-# # . ~/current.ps1
+# Add the following, remember to replace <uname> and make sure the distro is ok
+
+# # # $sourcePath = "\\wsl.localhost\Ubuntu-24.04\home\<uname>\workspace\nix-config\shared-dotfiles\profile.ps1"
+# # # $destPath = "~/current.ps1"
+# # # $sourceHash = (Get-FileHash -Path $sourcePath -Algorithm SHA256).Hash
+# # # $destHash = (Get-FileHash -Path $destPath -Algorithm SHA256 -ErrorAction SilentlyContinue).Hash
+# # # if ($sourceHash -ne $destHash) {
+# # #     Copy-Item -Path $sourcePath -Destination $destPath
+# # #     Write-Host "profile.ps1 has been updated."
+# # # }
+# # # . ~/current.ps1
 
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 Set-PSReadlineOption -BellStyle None
+Import-Module posh-git
 
 function C {
     param (

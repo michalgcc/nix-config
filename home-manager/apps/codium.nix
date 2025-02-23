@@ -41,6 +41,8 @@
         "git.openRepositoryInParentFolders" = "always";
         "editor.fontFamily" = "'Hack Nerd Font Mono'";
         "godotTools.editorPath.godot4" = "godot4";
+        "editor.inlineSuggest.suppressSuggestions" = true;
+        "cody.telemetry.level" = "off";
       };
   };
 }
