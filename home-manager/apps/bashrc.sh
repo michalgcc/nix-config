@@ -59,6 +59,7 @@ if is_wsl; then
 
     alias explorer.exe="/mnt/c/Windows/explorer.exe"
     alias cmd.exe="/mnt/c/Windows/system32/cmd.exe"
+    alias ssh.exe="/mnt/c/Windows/System32/OpenSSH/ssh.exe"
 fi
 
 prepend_or_remove_wsl_mnt_override_path() {
@@ -158,6 +159,10 @@ unlock_remote_server_luks() {
         ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@192.168.8.121
         sleep 1
     done
+}
+
+lg() {
+    lazygit
 }
 
 eval "$(starship init bash)"
