@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-
-nix flake update
+nix --extra-experimental-features "nix-command flakes" flake update

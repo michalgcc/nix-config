@@ -7,7 +7,7 @@
 #                                                               __/ |                          
 #                                                              |___/                           
 #
-# 1. Ext4 has added options "noatime" "commit=60" 
+# 1. btrfs has added options "compress=zstd" "noatime" 
 
 { config, lib, pkgs, modulesPath, ... }:
 
@@ -24,18 +24,18 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/f301bf59-aba0-4f67-8283-9765089d9795";
-      fsType = "ext4";
-      options = [ "noatime" "commit=60" ];
+      device = "/dev/disk/by-uuid/0d60b6b6-7454-474d-8944-0478975daa0a";
+      fsType = "btrfs";
+      options = [ "subvol=@" "compress=zstd" "noatime" ];
     };
 
-  boot.initrd.luks.devices."luks-52900783-9c59-40bb-9645-aaada9cef45c".device = "/dev/disk/by-uuid/52900783-9c59-40bb-9645-aaada9cef45c";
+  boot.initrd.luks.devices."luks-776fc6b5-35c9-490c-ad7b-6bb391a867d8".device = "/dev/disk/by-uuid/776fc6b5-35c9-490c-ad7b-6bb391a867d8";
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/7961-6AD4";
+      device = "/dev/disk/by-uuid/9932-5105";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices = [ ];
@@ -45,6 +45,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s20f0u2u4u2.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 

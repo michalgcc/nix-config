@@ -11,7 +11,7 @@ cd workspace
 git clone <this repository>
 
 # Copy hardware config
-cp /etc/nixos/hardware-configuration.nix nixos/desktop/hardware-configuration.nix
+cp /etc/nixos/hardware-configuration.nix nixos/<configuration-name>/hardware-configuration.nix
 
 # Push hardware config
 git push 
@@ -20,9 +20,10 @@ git push
 # Adjust hostname
 vim /etc/nixos/configuration.nix
 
-networking.hostName = "mg-desktop"
+networking.hostName = "mg-<configuration-name>"
 
 sudo nixos-rebuild switch
+reboot
 
 ./rebuild-nixos.sh
 ./rebuild-home-manager.sh

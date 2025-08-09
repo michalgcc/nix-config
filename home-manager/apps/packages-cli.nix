@@ -26,6 +26,7 @@
     wget
     wl-clipboard
     yq
+    shfmt
     # troubleshooting
     dnsutils
     iperf

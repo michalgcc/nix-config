@@ -95,4 +95,8 @@
 
   # Should not be touched unless something is missing
   system.stateVersion = "23.05";
+
+  # Enable scrub
+  services.btrfs.autoScrub.enable = true;
+  services.btrfs.autoScrub.interval = "weekly";
 }

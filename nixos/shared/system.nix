@@ -74,7 +74,7 @@
       # noto-fonts
       # noto-fonts-emoji
       # noto-fonts-cjk
-      (nerdfonts.override { fonts = [ "Hack" ]; })
+      pkgs.nerd-fonts.hack
     ];
   };
 
