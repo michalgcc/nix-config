@@ -19,7 +19,7 @@
     podman-compose
     powershell
     rename
-    ripgrep
+
 
     tmuxp
     tree
@@ -40,11 +40,12 @@
     qrencode
     vifm
     wireguard-tools
-    yt-dlp
     lynx
     pdfgrep
     # media
     ffmpeg-full
     somafm-cli
+    unstable.streamlink
+    unstable.yt-dlp
   ];
 }

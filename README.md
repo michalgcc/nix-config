@@ -62,17 +62,6 @@ git config --global credential.helper "/mnt/c/Users/a/scoop/apps/git/current/min
 # Update Windows git config to match Nix 
 Copy paste home-manager/apps/windows.git.config to %USERPROFILE%/.gitconfig
 ```
-# Optional:
-## Install NerdFont for Alacritty on Windows
-
-Download the latest version of 
-Hack.zip from https://github.com/ryanoasis/nerd-fonts/releases
-Unzip and install `HackNerdFontMono-BoldItalic.ttf  HackNerdFontMono-Bold.ttf  HackNerdFontMono-Italic.ttf  HackNerdFontMono-Regular.ttf`
-```
-sudo apt install flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-```
-
 ## Updating flake lock file
 
 ```
