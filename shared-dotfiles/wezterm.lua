@@ -12,6 +12,11 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   -- Resolve flickering issue on Windows
   config.front_end = "WebGpu"
   config.webgpu_power_preference = "HighPerformance"
+  config.webgpu_preferred_adapter = {
+      backend = "Vulkan",
+      device_type = "IntegratedGpu",
+      name = "Intel(R) Iris(R) Xe Graphics"
+  }
 else
   config.default_prog = { 'nu' }
   -- Wayland settings for Linux

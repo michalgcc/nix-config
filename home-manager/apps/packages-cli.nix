@@ -47,5 +47,6 @@
     somafm-cli
     unstable.streamlink
     unstable.yt-dlp
+    imagemagick
   ];
 }
