@@ -7,9 +7,9 @@
 #                                                               __/ |                          
 #                                                              |___/                           
 #
-# 1. Ext4 has added options "noatime" "commit=60" 
+# 1. btrfs has added options "compress=zstd" "noatime" 
 
-{ config, lib, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 {
   imports =
@@ -17,24 +17,25 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/1af40c4d-ca72-4bc8-8b82-78e4e202ee79";
-      fsType = "ext4";
-      options = [ "noatime" "commit=60" ];
+      device = "/dev/disk/by-uuid/015bbf95-996b-4144-8fa4-c7d557af0238";
+      fsType = "btrfs";
+      options = [ "subvol=@" "compress=zstd" "noatime" ];
     };
 
-  boot.initrd.luks.devices."luks-95f7210c-c31e-46f4-bb8a-c93881383412".device = "/dev/disk/by-uuid/95f7210c-c31e-46f4-bb8a-c93881383412";
+  boot.initrd.luks.devices."luks-d5420264-ba42-4510-99aa-4ce4d5973167".device = "/dev/disk/by-uuid/d5420264-ba42-4510-99aa-4ce4d5973167";
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/8456-A6BE";
+      device = "/dev/disk/by-uuid/24B7-AF63";
       fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices = [ ];
@@ -44,8 +45,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp4s0f3u3.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

@@ -81,7 +81,7 @@ def c [...paths] {
             code ...$targets | complete | ignore
         }
     } else {
-        ^codium ...$targets | complete | ignore
+        ^code ...$targets | complete | ignore
     }
 }
 

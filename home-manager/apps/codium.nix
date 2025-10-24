@@ -1,13 +1,13 @@
 { pkgs, ... }: {
   programs.vscode = {
     enable = true;
-    package = pkgs.unstable.vscodium-fhs;
+    package = pkgs.unstable.vscode-fhs;
     profiles.default = {
-      extensions = with pkgs.unstable.vscode-extensions; [
-        vscodevim.vim
-        # Nix
-        jnoortheen.nix-ide
-      ];
+      # extensions = with pkgs.unstable.vscode-extensions; [
+      #   vscodevim.vim
+      #   # Nix
+      #   jnoortheen.nix-ide
+      # ];
       userSettings =
         {
           "editor.renderWhitespace" = "all";

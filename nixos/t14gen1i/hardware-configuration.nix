@@ -24,16 +24,16 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/0d60b6b6-7454-474d-8944-0478975daa0a";
+      device = "/dev/disk/by-uuid/3b51fae5-b71c-4c00-8d59-d9b8a1204441";
       fsType = "btrfs";
       options = [ "subvol=@" "compress=zstd" "noatime" ];
     };
 
-  boot.initrd.luks.devices."luks-776fc6b5-35c9-490c-ad7b-6bb391a867d8".device = "/dev/disk/by-uuid/776fc6b5-35c9-490c-ad7b-6bb391a867d8";
+  boot.initrd.luks.devices."luks-bde042a7-ef5c-40cd-a458-c65a0d38a5d6".device = "/dev/disk/by-uuid/bde042a7-ef5c-40cd-a458-c65a0d38a5d6";
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/9932-5105";
+      device = "/dev/disk/by-uuid/D271-38DE";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
@@ -45,7 +45,6 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s20f0u2u4u2.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
