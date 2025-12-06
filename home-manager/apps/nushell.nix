@@ -20,11 +20,7 @@
       extraConfig = ''
 
        '';
-      shellAliases = {
-        vi = "hx";
-        vim = "hx";
-        nano = "hx";
-      };
+      shellAliases = { };
     };
     carapace.enable = true;
     carapace.enableNushellIntegration = true;

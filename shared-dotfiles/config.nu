@@ -5,6 +5,12 @@
 # scoop install zoxide - Need to add something to env.nu on Windows, check their github
 # scoop install starship
 
+# Load secrets if the file exists
+if ("~/.scr.nu" | path exists) {
+    source ~/.scr.nu
+}
+
+
 # --- Helper Functions ---
 
 # Checks if running in Windows Subsystem for Linux (WSL) by looking for an

@@ -1,6 +1,6 @@
 # Must be on start
-source "$(blesh-share)"/ble.sh --attach=none # does not work currently
-set -o vi
+# source "$(blesh-share)"/ble.sh --attach=none # does not work currently
+# set -o vi
 
 # Better ctrl + backspace line erase
 stty werase undef
@@ -165,11 +165,11 @@ lg() {
     lazygit
 }
 
-eval "$(starship init bash)"
-# For direnv with ble-sh
-if ! is_wsl; then
-    eval "$(direnv hook bash)"
-fi
+# eval "$(starship init bash)"
+# # For direnv with ble-sh
+# if ! is_wsl; then
+#     eval "$(direnv hook bash)"
+# fi
 
-# Must be at the end
-[[ ${BLE_VERSION-} ]] && ble-attach
+# # Must be at the end
+# [[ ${BLE_VERSION-} ]] && ble-attach

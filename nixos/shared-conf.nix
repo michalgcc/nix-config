@@ -99,4 +99,6 @@
   # Enable scrub
   services.btrfs.autoScrub.enable = true;
   services.btrfs.autoScrub.interval = "weekly";
+
+  services.fwupd.enable = true;
 }
