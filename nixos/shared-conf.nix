@@ -8,6 +8,8 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Latest stable kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
 
   nix = {
