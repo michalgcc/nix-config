@@ -34,4 +34,6 @@ config.window_padding = {
 config.audible_bell = "Disabled"
 config.warn_about_missing_glyphs = false
 
+config.font_size = 10.0
+
 return config

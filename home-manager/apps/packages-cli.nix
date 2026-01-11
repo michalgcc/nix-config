@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     # dev
-    blesh
     bintools
     detox
     dive
@@ -17,8 +16,10 @@
     nodejs
     patchelf
     podman-compose
+    steam-run
     powershell
     rename
+    libnotify
 
 
     tmuxp

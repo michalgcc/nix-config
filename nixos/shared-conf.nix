@@ -85,10 +85,12 @@
   users.users.mg = {
     isNormalUser = true;
     description = "mg";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "podman" ];
     packages = with pkgs; [
       home-manager
     ];
+    subUidRanges = [{ startUid = 100000; count = 65536; }];
+    subGidRanges = [{ startGid = 100000; count = 65536; }];
   };
 
   nixpkgs.config.allowUnfree = true;

@@ -57,6 +57,7 @@ if (not ((is_windows) or (is_wsl) or (is_windows_filesystem_in_wsl))) {
     $env.PATH = (
     $env.PATH
     | split row (char esep)
+    | prepend $"($env.HOME)/.npm-global/bin"
     | prepend /home/mg/.apps
     | append /usr/bin/env
     )
@@ -87,7 +88,7 @@ def c [...paths] {
             code ...$targets | complete | ignore
         }
     } else {
-        ^code ...$targets | complete | ignore
+        ^codium ...$targets | complete | ignore
     }
 }
 
@@ -122,3 +123,6 @@ def unlock_remote_server_luks [] {
 def lg [...args] {
     lazygit ...$args
 }
+
+# opencode alias
+alias opencode = steam-run opencode

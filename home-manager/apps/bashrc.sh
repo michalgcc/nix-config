@@ -49,6 +49,9 @@ remove_path() {
     PATH=$(echo "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
 }
 
+# Add npm global packages to PATH
+prepend_path_if_not_found "$HOME/.npm-global/bin"
+
 if is_wsl; then
     . ~/.nix-profile/etc/profile.d/nix.sh
     link_wsl_exe "git.exe" "git"
@@ -164,6 +167,9 @@ unlock_remote_server_luks() {
 lg() {
     lazygit
 }
+
+# opencode alias
+alias opencode="steam-run opencode"
 
 # eval "$(starship init bash)"
 # # For direnv with ble-sh

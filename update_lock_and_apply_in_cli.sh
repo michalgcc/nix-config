@@ -10,3 +10,4 @@ fi
 # nix flake lock --update-input nixpkgs --update-input home-manager
 ./update_lock.sh
 ./rebuild_cli_nix_home_manager.sh
+./install_npm_packages.sh

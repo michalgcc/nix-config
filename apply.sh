@@ -8,7 +8,6 @@ if [ "$ID" != "nixos" ]; then
 fi
 
 # nix flake lock --update-input nixpkgs --update-input home-manager
-./update_lock.sh
 ./rebuild_home_manager.sh
 ./rebuild_nixos.sh
 ./install_flatpaks.sh

@@ -17,6 +17,7 @@
 
   home.sessionVariables = {
     TMUX_TMPDIR = pkgs.lib.mkForce "/tmp";
+    NPM_CONFIG_PREFIX = "$HOME/.npm-global";
   };
 
   nix = {

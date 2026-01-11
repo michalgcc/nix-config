@@ -15,11 +15,12 @@
   zramSwap.enable = true;
 
   virtualisation = {
+    containers.enable = true;
     podman = {
       enable = true;
 
       # Create a `docker` alias for podman, to use it as a drop-in replacement
-      # dockerCompat = true;
+      dockerCompat = true;
 
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
@@ -40,7 +41,10 @@
 
   # Fix Flatpak missing icons and fonts:
   # https://github.com/NixOS/nixpkgs/issues/119433
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+  };
 
   system.fsPackages = [ pkgs.bindfs ];
   fileSystems =
@@ -71,9 +75,11 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      # noto-fonts
-      # noto-fonts-emoji
-      # noto-fonts-cjk
+      # Chinese
+      noto-fonts
+      noto-fonts-emoji
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       pkgs.nerd-fonts.hack
     ];
   };
