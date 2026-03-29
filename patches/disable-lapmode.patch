@@ -1,0 +1,13 @@
+diff --git a/drivers/platform/x86/lenovo/thinkpad_acpi.c b/drivers/platform/x86/lenovo/thinkpad_acpi.c
+index abcdefg1234567..hijklmn8901234 100644
+--- a/drivers/platform/x86/lenovo/thinkpad_acpi.c
++++ b/drivers/platform/x86/lenovo/thinkpad_acpi.c
+@@ -10211,7 +10211,7 @@ static int lapsensor_get(bool *present, bool *state)
+ 	if (err)
+ 		return err;
+ 
+ 	*present = true; /*If we get his far, we have lapmode support*/
+-	*state = output & BIT(DYTC_GET_LAPMODE_BIT) ? true : false;
++	*state = false;
+ 	return 0;
+ }

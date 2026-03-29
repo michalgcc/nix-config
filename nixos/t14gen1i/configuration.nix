@@ -55,4 +55,20 @@
     options kvm_intel emulate_invalid_guest_state=0
     options kvm ignore_msrs=1
   '';
+
+  # Patched thinkpad_acpi module with lap mode disabled
+  boot.extraModulePackages = [
+    (pkgs.callPackage ../../modules/thinkpad_acpi.nix {
+      kernel = config.boot.kernelPackages.kernel;
+    })
+  ];
+
+  systemd.sleep.extraConfig = ''
+    SuspendState=mem
+    AllowSuspend=yes
+    MemorySleepMode=deep
+  '';
+
+  systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+
 }

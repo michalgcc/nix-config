@@ -1,13 +1,14 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.git-credential-oauth.enable = true;
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userEmail = "gaszmichal@gmail.com";
-    userName = "Michal Gasz";
-
-    # Keep windows.git.config up to date
-    extraConfig = {
+    settings = {
+      user = {
+        email = "gaszmichal@gmail.com";
+        name = "Michal Gasz";
+      };
       # When running on WSL use git-credential-manager from scoop (scoop install git)
       # One time thing:
       # git config --global credential.helper "/mnt/c/Users/a/scoop/apps/git/current/mingw64/bin/git-credential-manager.exe"
@@ -18,13 +19,13 @@
       pull.rebase = false;
       merge.ff = "only";
       push.autoSetupRemote = true;
-    };
-    aliases = {
-      co = "checkout";
-      f = "fetch";
-      p = "pull";
-      s = "status";
-      fp = "push --force";
+      alias = {
+        co = "checkout";
+        f = "fetch";
+        p = "pull";
+        s = "status";
+        fp = "push --force";
+      };
     };
   };
 }

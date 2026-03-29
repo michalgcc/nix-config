@@ -7,5 +7,6 @@
     arduino-ide
     audacious
     popsicle
+    chromium
   ];
 }
