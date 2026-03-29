@@ -33,7 +33,6 @@
   virtualisation.libvirtd.onShutdown = "shutdown";
   services.spice-vdagentd.enable = true;
 
-
   # Use wayland in Chromium/electron apps
   # https://nixos.wiki/wiki/Chromium#Enabling_native_Wayland_support
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -52,7 +51,11 @@
       mkRoSymBind = path: {
         device = path;
         fsType = "fuse.bindfs";
-        options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
+        options = [
+          "ro"
+          "resolve-symlinks"
+          "x-gvfs-hide"
+        ];
       };
       aggregatedIcons = pkgs.buildEnv {
         name = "system-icons";
@@ -65,6 +68,7 @@
         name = "system-fonts";
         paths = config.fonts.packages;
         pathsToLink = [ "/share/fonts" ];
+        ignoreCollisions = true;
       };
     in
     {
@@ -77,7 +81,7 @@
     packages = with pkgs; [
       # Chinese
       noto-fonts
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       pkgs.nerd-fonts.hack

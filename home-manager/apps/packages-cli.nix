@@ -46,7 +46,6 @@
     # media
     ffmpeg-full
     somafm-cli
-    unstable.streamlink
     unstable.yt-dlp
     imagemagick
   ];

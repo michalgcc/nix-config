@@ -30,6 +30,7 @@
   # };
 
   networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [ 45161 ];
 
   time.timeZone = "Europe/Amsterdam";
 
@@ -87,7 +88,7 @@
   users.users.mg = {
     isNormalUser = true;
     description = "mg";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "podman" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "podman" "dialout" ];
     packages = with pkgs; [
       home-manager
     ];
