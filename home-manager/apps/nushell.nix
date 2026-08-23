@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  # Core tools replacement  
+  # Core tools replacement
   home.packages = with pkgs; [
     bat
     dust
@@ -14,12 +14,11 @@
 
     nushell = {
       enable = true;
-      # The config.nu can be anywhere you want if you like to edit your Nushell with Nu
-      configFile.source = ../../shared-dotfiles/config.nu;
-      # for editing directly to config.nu 
-      extraConfig = ''
-
-       '';
+      # Feed the shared config through extraConfig instead of configFile.source:
+      # configFile replaces the whole generated config.nu, which silently drops
+      # home-manager integrations (zoxide/carapace `source` lines). With
+      # extraConfig the integrations are appended after our content.
+      extraConfig = builtins.readFile ../../shared-dotfiles/config.nu;
       shellAliases = { };
     };
     carapace.enable = true;

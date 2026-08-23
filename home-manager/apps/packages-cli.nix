@@ -12,7 +12,7 @@
     lazygit
     mtr
     nil
-    nixpkgs-fmt
+    nixfmt
     nodejs
     patchelf
     podman-compose
@@ -20,7 +20,6 @@
     powershell
     rename
     libnotify
-
 
     tmuxp
     tree
@@ -48,5 +47,8 @@
     somafm-cli
     unstable.yt-dlp
     imagemagick
+    # disk
+    parted
+    e2fsprogs
   ];
 }

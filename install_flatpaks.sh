@@ -65,5 +65,4 @@ flatpak install flathub org.signal.Signal
 flatpak override --user --env=SIGNAL_USE_WAYLAND=1,SIGNAL_USE_TRAY_ICON=1 org.signal.Signal
 
 mkdir -p $HOME/.local/share/fonts && cp -fL /run/current-system/sw/share/X11/fonts/* $HOME/.local/share/fonts/
-flatpak install flathub com.brave.Browser
 flatpak override --filesystem=~/.local/share/fonts:ro com.brave.Browser --user

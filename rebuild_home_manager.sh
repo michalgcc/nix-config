@@ -7,4 +7,4 @@ if [ "$ID" != "nixos" ]; then
     exit 1
 fi
 
-home-manager switch --flake .#mg@home-manager
+home-manager switch -b backup --flake .#mg@home-manager

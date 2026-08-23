@@ -2,9 +2,17 @@
 # source "$(blesh-share)"/ble.sh --attach=none # does not work currently
 # set -o vi
 
+# Prefer a readline-enabled bash when the environment provides a crippled one
+# (e.g. nix devshells put stdenv's build bash in PATH)
+if [ -x "$HOME/.nix-profile/bin/bash" ]; then
+    alias bash="$HOME/.nix-profile/bin/bash"
+fi
+
 # Better ctrl + backspace line erase
-stty werase undef
-bind '\C-w:unix-filename-rubout'
+if type -t bind >/dev/null 2>&1; then
+    stty werase undef
+    bind '\C-w:unix-filename-rubout'
+fi
 
 wsl_mnt_override="$HOME/.config/wsl_mnt_override/"
 

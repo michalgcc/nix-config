@@ -93,18 +93,19 @@ def c [...paths] {
 }
 
 # Chooses the correct ssh executable based on the environment (WSL or Linux).
-def ssh [...args] {
+# --wrapped lets unknown flags (e.g. ssh -J host host) pass through to the rest args.
+def --wrapped ssh [...args] {
     if ((is_windows) or (is_wsl)) {
-        ssh.exe ...$args
+        ^ssh.exe ...$args
     } else {
         ^ssh ...$args
     }
 }
 
 # Chooses the correct pwsh executable based on the environment.
-def pwsh [...args] {
+def --wrapped pwsh [...args] {
     if ((is_windows) or (is_wsl)) {
-        pwsh.exe ...$args
+        ^pwsh.exe ...$args
     } else {
         ^pwsh ...$args
     }
@@ -120,8 +121,8 @@ def unlock_remote_server_luks [] {
 }
 
 # A simple wrapper for lazygit that forwards all arguments.
-def lg [...args] {
-    lazygit ...$args
+def --wrapped lg [...args] {
+    ^lazygit ...$args
 }
 
 # opencode alias

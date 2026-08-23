@@ -12,31 +12,25 @@
 
   hardware.new-lg4ff.enable = true;
 
-  # Disable wake up on mouse events
-  # cat /proc/acpi/wakeup
-  # grep . /sys/bus/usb/devices/*/power/wakeu
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{power/wakeup}="disabled"
-  '';
-
   services.sunshine = {
     enable = true;
     autoStart = true;
     capSysAdmin = true;
     openFirewall = true;
     applications = {
-      apps = [{
-        name = "Desktop FullHD";
-        prep-cmd = [{
-          do =
-            "kscreen-doctor output.DP-4.disable output.DP-6.disable output.HDMI-A-1.enable output.HDMI-A-1.mode.1920x1080@60";
-          undo =
-            "kscreen-doctor output.DP-4.enable output.DP-6.enable output.HDMI-A-1.disable";
-        }];
-        exclude-global-prep-cmd = "false";
-        auto-detach = "true";
-      }];
+      apps = [
+        {
+          name = "Desktop FullHD";
+          prep-cmd = [
+            {
+              do = "kscreen-doctor output.DP-4.disable output.DP-6.disable output.HDMI-A-1.enable output.HDMI-A-1.mode.1920x1080@60";
+              undo = "kscreen-doctor output.DP-4.enable output.DP-6.enable output.HDMI-A-1.disable";
+            }
+          ];
+          exclude-global-prep-cmd = "false";
+          auto-detach = "true";
+        }
+      ];
     };
   };
 

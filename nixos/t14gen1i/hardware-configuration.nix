@@ -1,42 +1,60 @@
-#   _____          _                         _                                   _ _     _     
-#  / ____|        | |                       | |                                 | (_)   | |  _ 
+#   _____          _                         _                                   _ _     _
+#  / ____|        | |                       | |                                 | (_)   | |  _
 # | |    _   _ ___| |_ ___  _ __ ___     ___| |__   __ _ _ __   __ _  ___  ___  | |_ ___| |_(_)
-# | |   | | | / __| __/ _ \| '_ ` _ \   / __| '_ \ / _` | '_ \ / _` |/ _ \/ __| | | / __| __|  
-# | |___| |_| \__ \ || (_) | | | | | | | (__| | | | (_| | | | | (_| |  __/\__ \ | | \__ \ |_ _ 
+# | |   | | | / __| __/ _ \| '_ ` _ \   / __| '_ \ / _` | '_ \ / _` |/ _ \/ __| | | / __| __|
+# | |___| |_| \__ \ || (_) | | | | | | | (__| | | | (_| | | | | (_| |  __/\__ \ | | \__ \ |_ _
 #  \_____\__,_|___/\__\___/|_| |_| |_|  \___|_| |_|\__,_|_| |_|\__, |\___||___/ |_|_|___/\__(_)
-#                                                               __/ |                          
-#                                                              |___/                           
+#                                                               __/ |
+#                                                              |___/
 #
-# 1. btrfs has added options "compress=zstd" "noatime" 
-
-{ config, lib, pkgs, modulesPath, ... }:
+# 1. btrfs has added options "compress=zstd" "noatime"
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+{
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+    "rtsx_pci_sdmmc"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/3b51fae5-b71c-4c00-8d59-d9b8a1204441";
-      fsType = "btrfs";
-      options = [ "subvol=@" "compress=zstd" "noatime" ];
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/3b51fae5-b71c-4c00-8d59-d9b8a1204441";
+    fsType = "btrfs";
+    options = [
+      "subvol=@"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
 
-  boot.initrd.luks.devices."luks-bde042a7-ef5c-40cd-a458-c65a0d38a5d6".device = "/dev/disk/by-uuid/bde042a7-ef5c-40cd-a458-c65a0d38a5d6";
+  boot.initrd.luks.devices."luks-bde042a7-ef5c-40cd-a458-c65a0d38a5d6".device =
+    "/dev/disk/by-uuid/bde042a7-ef5c-40cd-a458-c65a0d38a5d6";
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/D271-38DE";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/D271-38DE";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
 
   swapDevices = [ ];
 

@@ -1,16 +1,28 @@
-{ lib, inputs, config, pkgs, ... }:
+{
+  lib,
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./shared/default.nix
-    ];
+  imports = [
+    ./shared/default.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # Latest stable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Keep /tmp in RAM: saves SSD writes, wiped on every boot
+  boot.tmp.useTmpfs = true;
 
+  # Mirror the home-manager profile: expose nixpkgs-unstable as pkgs.unstable
+  nixpkgs.overlays = [
+    outputs.overlays.unstable-packages
+  ];
 
   nix = {
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
@@ -51,12 +63,11 @@
   services.xserver.enable = true;
 
   # KDE:
-  services.displayManager.sddm =
-    {
-      enable = true;
-      enableHidpi = true;
-      wayland.enable = true;
-    };
+  services.displayManager.sddm = {
+    enable = true;
+    enableHidpi = true;
+    wayland.enable = true;
+  };
   services.desktopManager.plasma6.enable = true;
 
   services.xserver.xkb = {
@@ -88,12 +99,30 @@
   users.users.mg = {
     isNormalUser = true;
     description = "mg";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "podman" "dialout" ];
-    packages = with pkgs; [
-      home-manager
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirtd"
+      "podman"
+      "dialout"
     ];
-    subUidRanges = [{ startUid = 100000; count = 65536; }];
-    subGidRanges = [{ startGid = 100000; count = 65536; }];
+    # home-manager CLI matching the flake input (avoids drift against the
+    # release-26.05 modules used by the homeConfigurations)
+    packages = [
+      inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
+    ];
+    subUidRanges = [
+      {
+        startUid = 100000;
+        count = 65536;
+      }
+    ];
+    subGidRanges = [
+      {
+        startGid = 100000;
+        count = 65536;
+      }
+    ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -101,8 +130,11 @@
   # Should not be touched unless something is missing
   system.stateVersion = "23.05";
 
-  # Enable scrub
-  services.btrfs.autoScrub.enable = true;
+  # Enable scrub, but only on hosts that actually have btrfs filesystems
+  # (mg-laptop is ext4; the module asserts otherwise)
+  services.btrfs.autoScrub.enable = lib.any (fs: fs.fsType == "btrfs") (
+    lib.attrValues config.fileSystems
+  );
   services.btrfs.autoScrub.interval = "weekly";
 
   services.fwupd.enable = true;

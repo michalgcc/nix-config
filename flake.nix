@@ -9,7 +9,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -40,18 +46,20 @@
         "mg@home-manager-cli" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home-manager/home-cli.nix ];
+          modules = [ ./home-manager/base.nix ];
         };
       };
 
       devShells.x86_64-linux.default = pkgs.mkShell {
         buildInputs = [
+          pkgs.bashInteractive
           pkgs.cocogitto
           pkgs.nixfmt
           pkgs.shfmt
         ];
 
         shellHook = ''
+          export SHELL=${pkgs.bashInteractive}/bin/bash
           yes | cog install-hook --all
         '';
       };

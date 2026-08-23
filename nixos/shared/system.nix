@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   services.flatpak.enable = true;
   services.fstrim.enable = true;
@@ -40,10 +45,7 @@
 
   # Fix Flatpak missing icons and fonts:
   # https://github.com/NixOS/nixpkgs/issues/119433
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-  };
+  xdg.portal.enable = true;
 
   system.fsPackages = [ pkgs.bindfs ];
   fileSystems =
@@ -89,7 +91,20 @@
   };
 
   # Kernel params
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 0;
+  # zram-backed swap has no seek/IO cost, so a high swappiness is cheap and
+  # reduces pressure on the SSD-backed page cache; page-cluster disables
+  # readahead which is useless on zram. Only applied when zram is enabled,
+  # so a zram-less host writes nothing to disk-backed swap by default.
+  boot.kernel.sysctl = lib.mkIf config.zramSwap.enable {
+    "vm.swappiness" = 180;
+    "vm.page-cluster" = 0;
   };
+
+  # Disable wake up on mouse events (shared by all hosts)
+  # cat /proc/acpi/wakeup
+  # grep . /sys/bus/usb/devices/*/power/wakeup
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{power/wakeup}="disabled"
+  '';
 }
