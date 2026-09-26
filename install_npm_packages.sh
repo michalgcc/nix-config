@@ -16,20 +16,23 @@ echo "Checking for NPM packages..."
 
 npm install -g @fission-ai/openspec@latest
 
-# opencode-ai's postinstall runs its glibc binary to pick the right platform
-# package; that needs an FHS loader, so run npm inside steam-run on NixOS
+# OpenCode V1 and V2 both provide the opencode command.
+npm uninstall -g opencode-ai
+
+# @opencode/cli's postinstall selects its native binary; run npm inside
+# steam-run on NixOS so the glibc binary has an FHS loader.
 if command -v steam-run >/dev/null 2>&1; then
-    steam-run npm install -g --allow-scripts=opencode-ai opencode-ai@latest
+    steam-run npm install -g --allow-scripts=@opencode/cli @opencode/cli@latest
 else
-    npm install -g --allow-scripts=opencode-ai opencode-ai@latest
+    npm install -g --allow-scripts=@opencode/cli @opencode/cli@latest
 fi
 
 # Update all globally installed npm packages
 echo "Updating all globally installed npm packages..."
 if command -v steam-run >/dev/null 2>&1; then
-    steam-run npm update -g --allow-scripts=opencode-ai
+    steam-run npm update -g --allow-scripts=@opencode/cli
 else
-    npm update -g --allow-scripts=opencode-ai
+    npm update -g --allow-scripts=@opencode/cli
 fi
 
 echo "NPM package installation and update complete!"
