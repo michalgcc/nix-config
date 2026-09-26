@@ -41,7 +41,11 @@
   #   "/crypto_keyfile.bin" = null;
   # };
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = [ pkgs.networkmanager-openvpn ];
+  };
+
   networking.firewall.allowedTCPPorts = [ 45161 ];
 
   time.timeZone = "Europe/Amsterdam";
