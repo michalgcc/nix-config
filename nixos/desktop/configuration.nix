@@ -3,6 +3,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../shared-conf.nix
+    ../shared/user-mg.nix
     # When extra power is needed for immich:
     # ./immich-machine-learning.nix.nix
     ../shared/lutris.nix
