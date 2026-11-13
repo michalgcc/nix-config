@@ -15,8 +15,6 @@
 
   # Create writable symlink to VSCodium settings using mkOutOfStoreSymlink
   home.file.".config/VSCodium/User/settings.json".source = lib.mkForce (
-    config.lib.file.mkOutOfStoreSymlink (
-      builtins.toString /home/mg/workspace/nix-config/shared-dotfiles/vscode-settings.json
-    )
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/workspace/nix-config/shared-dotfiles/vscode-settings.json"
   );
 }

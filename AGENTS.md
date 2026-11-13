@@ -7,8 +7,9 @@ non-NixOS (Ubuntu/WSL) CLI profile.
 
 | Target                              | Flake attr           | Kind                         |
 | ----------------------------------- | -------------------- | ---------------------------- |
-| `mg-laptop`, `mg-desktop`, `mg-t14gen1i` | `.#<hostname>`       | NixOS system                 |
+| `mg-laptop`, `mg-desktop`, `mg-t14gen1i`, `zuja` | `.#<hostname>`       | NixOS system                 |
 | `mg@home-manager`                   | `.#mg@home-manager`  | home-manager (GUI, on NixOS) |
+| `zuja@home-manager`                 | `.#zuja@home-manager` | home-manager (GUI, on NixOS) |
 | `mg@home-manager-cli`               | `.#mg@home-manager-cli` | home-manager (CLI, Ubuntu/WSL) |
 
 ## Repo layout
@@ -30,7 +31,7 @@ The helper scripts are the source of truth — prefer them over raw `nixos-rebui
 
 - `./format_code.sh` — format **before every commit**. Runs `nixfmt` on `*.nix` and `shfmt -i=4` on shell scripts. Also enforced by the pre-commit hook.
 - `./rebuild_nixos.sh` — `nixos-rebuild switch --flake .#$(hostname)` (NixOS only; guards on `/etc/os-release`).
-- `./rebuild_home_manager.sh` — `home-manager switch` for `mg@home-manager` (NixOS GUI).
+- `./rebuild_home_manager.sh` — `home-manager switch` for `$USER@home-manager` (NixOS GUI; `mg@home-manager` on your machines, `zuja@home-manager` on zuja).
 - `./rebuild_cli_nix_home_manager.sh` — `home-manager switch` for `mg@home-manager-cli` (Ubuntu/WSL).
 - `./apply.sh` — rebuild home-manager + NixOS, then flatpaks + npm globals (NixOS only).
 - `./update_lock.sh` — `nix flake update`.

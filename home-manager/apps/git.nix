@@ -5,13 +5,19 @@
   ...
 }:
 {
+  options.mg.git.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
+    description = "Install and configure git for this user";
+  };
+
   options.mg.git.useSecretService = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Store git credentials in the Secret Service keyring (libsecret) instead of a plaintext file";
   };
 
-  config = {
+  config = lib.mkIf config.mg.git.enable {
     programs.git-credential-oauth.enable = true;
     programs.git = {
       enable = true;

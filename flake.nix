@@ -35,6 +35,10 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./nixos/t14gen1i/configuration.nix ];
         };
+        zuja = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./nixos/zuja/configuration.nix ];
+        };
       };
 
       homeConfigurations = {
@@ -47,6 +51,17 @@
           pkgs = pkgs;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home-manager/base.nix ];
+        };
+        "zuja@home-manager" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home-manager/home-gui.nix
+            {
+              mg.user.name = "zuja";
+              mg.git.enable = false;
+            }
+          ];
         };
       };
 
