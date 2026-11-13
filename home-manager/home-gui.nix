@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./apps/codium.nix
+    ./apps/fcitx5.nix
     ./apps/kde.nix
     ./apps/packages-gui.nix
     ./base.nix
