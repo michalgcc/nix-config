@@ -39,7 +39,7 @@
     device = "/dev/mapper/luks-f7f257c8-42ed-4454-a19c-dc518d119ad1";
     fsType = "btrfs";
     options = [
-      "subvol=@"
+      "subvol=home"
       "compress=zstd"
       "noatime"
     ];
