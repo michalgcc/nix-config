@@ -1,5 +1,3 @@
-# Must be on start
-# source "$(blesh-share)"/ble.sh --attach=none # does not work currently
 # set -o vi
 
 # Prefer a readline-enabled bash when the environment provides a crippled one
@@ -179,11 +177,5 @@ lg() {
 # opencode alias
 alias opencode="steam-run opencode"
 
-# eval "$(starship init bash)"
-# # For direnv with ble-sh
-# if ! is_wsl; then
-#     eval "$(direnv hook bash)"
-# fi
-
-# # Must be at the end
-# [[ ${BLE_VERSION-} ]] && ble-attach
+# Secrets (bash port of the former ~/.scr.nu)
+[ -f "$HOME/.scr.sh" ] && . "$HOME/.scr.sh"

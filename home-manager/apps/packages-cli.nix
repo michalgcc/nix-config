@@ -1,11 +1,17 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    # core cli tools (moved from the removed nushell.nix)
+    bat
+    dust
+    fd
+    ouch
+    ripgrep
+
     # dev
     bintools
     detox
     dive
     distrobox
-    fzf
     gdb
     gitui
     grc

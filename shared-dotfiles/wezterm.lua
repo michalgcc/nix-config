@@ -8,7 +8,7 @@ end
 
 -- Windows-specific configuration
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-  config.default_prog = { 'nu' }
+  config.default_prog = { 'pwsh.exe' }
   -- Resolve flickering issue on Windows
   config.front_end = "WebGpu"
   config.webgpu_power_preference = "HighPerformance"
@@ -18,7 +18,7 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
       name = "Intel(R) Iris(R) Xe Graphics"
   }
 else
-  config.default_prog = { 'nu' }
+  -- No default_prog: wezterm launches the login shell (bash)
   -- Wayland settings for Linux
   config.enable_wayland = true
 end

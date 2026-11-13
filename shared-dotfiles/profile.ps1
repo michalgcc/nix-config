@@ -26,22 +26,6 @@
 # # }
 
 
-# # $sourcePath_config = "\\wsl.localhost\Ubuntu\home\<uname>\workspace\nix-config\shared-dotfiles\config.nu"
-# # $destPath_config   = "C:\Users\<uname>\AppData\Roaming\nushell\config.nu"
-# # $sourceHash_config = (Get-FileHash -Path $sourcePath_config -Algorithm SHA256).Hash
-# # $destHash_config   = (Get-FileHash -Path $destPath_config -Algorithm SHA256 -ErrorAction SilentlyContinue).Hash
-
-# # if ($sourceHash_config -ne $destHash_config) {
-# #     $destDir = Split-Path -Path $destPath_config -Parent
-# #     if (-not (Test-Path -LiteralPath $destDir)) {
-# #         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
-# #     }
-
-# #     Copy-Item -Path $sourcePath_config -Destination $destPath_config -Force
-# #     Write-Host "config.nu has been updated."
-# # }
-
-
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 Set-PSReadlineOption -BellStyle None
 Import-Module posh-git

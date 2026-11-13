@@ -7,7 +7,6 @@
     ./apps/tmux/sessions/configs.nix
     ./apps/tmux/tmux.nix
     ./apps/wezterm.nix
-    ./apps/nushell.nix
     ./dotfiles.nix
     ./shared.nix
   ];
