@@ -4,6 +4,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../shared-conf.nix
+    ../shared/steam.nix
   ];
 
   networking.hostName = "mg-t14gen1i";
@@ -11,16 +12,11 @@
   # Programs
   # services.zerotierone.enable = true;
 
-  # Hardware config to make it more visible
-  hardware.nvidia.prime = {
-    offload = {
-      enable = true;
-      enableOffloadCmd = true;
-    };
-    # Make sure to use the correct Bus ID values for your system!
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:45:0:0";
-  };
+  # The MX330 dGPU is intentionally never used (it runs too warm).
+  # Blacklisting nouveau makes the card invisible to the kernel: no NVK
+  # Vulkan device for apps to trip over, and the card stays powered down.
+  # Bus IDs in case it is ever revived: intel "PCI:0:2:0", nvidia "PCI:45:0:0"
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   # Video acceleration
   hardware.graphics = {

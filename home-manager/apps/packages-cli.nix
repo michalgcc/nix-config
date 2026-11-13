@@ -7,6 +7,7 @@
     distrobox
     fzf
     gdb
+    gitui
     grc
     jq
     lazygit

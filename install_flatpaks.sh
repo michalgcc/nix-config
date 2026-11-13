@@ -64,5 +64,11 @@ flatpak install flathub io.github.giantpinkrobots.flatsweep
 flatpak install flathub org.signal.Signal
 flatpak override --user --env=SIGNAL_USE_WAYLAND=1,SIGNAL_USE_TRAY_ICON=1 org.signal.Signal
 
+flatpak install flathub im.riot.Riot
+# Element (Electron safeStorage) needs to talk to kwalletd6, else it fails
+# with "No encryption support ... encryption is not available on your keyring
+# kwallet6"
+flatpak override --user --talk-name=org.kde.kwalletd6 im.riot.Riot
+
 mkdir -p $HOME/.local/share/fonts && cp -fL /run/current-system/sw/share/X11/fonts/* $HOME/.local/share/fonts/
 flatpak override --filesystem=~/.local/share/fonts:ro com.brave.Browser --user
