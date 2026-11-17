@@ -12,6 +12,19 @@ if type -t bind >/dev/null 2>&1; then
     bind '\C-w:unix-filename-rubout'
 fi
 
+# fzf: prefer fd over find (gitignore-aware, much faster on large trees).
+# Exported here so this file also works on Git Bash (Windows), where
+# home-manager is absent. Windows prerequisites: scoop install fzf fd
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+
+# Git Bash has no home-manager to source the fzf integration - do it here.
+# On Linux/WSL home-manager sources it later in the generated bashrc.
+if [[ $- == *i* ]] && [[ $OSTYPE == msys || $OSTYPE == cygwin ]] && command -v fzf >/dev/null; then
+    eval "$(fzf --bash)"
+fi
+
 wsl_mnt_override="$HOME/.config/wsl_mnt_override/"
 
 link_wsl_exe() {
@@ -37,12 +50,20 @@ link_wsl_exe() {
     ln -s "$windows_exe_path" "$symlink_path"
 }
 
+# WSL detection cannot change within a session - evaluate once at startup
+if grep -qi Microsoft /proc/version 2>/dev/null; then
+    IS_WSL=1
+else
+    IS_WSL=0
+fi
+
 is_wsl() {
-    grep -qi Microsoft /proc/version
+    [[ $IS_WSL == 1 ]]
 }
 
 is_windows_filesystem() {
-    pwd -P | grep -q "^/mnt/c/*"
+    # $PWD is the logical path; a symlink into /mnt/c would not match here
+    [[ $PWD == /mnt/c/* ]]
 }
 
 prepend_path_if_not_found() {
@@ -52,7 +73,12 @@ prepend_path_if_not_found() {
 }
 
 remove_path() {
-    PATH=$(echo "$PATH" | awk -v RS=: -v ORS=: '$0 != "'"$1"'"' | sed 's/:$//')
+    local out="" entry
+    local IFS=:
+    for entry in $PATH; do
+        [ -n "$entry" ] && [ "$entry" != "$1" ] && out+="$entry:"
+    done
+    PATH="${out%:}"
 }
 
 # Add npm global packages to PATH
