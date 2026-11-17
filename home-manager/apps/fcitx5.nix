@@ -35,6 +35,15 @@ in
         # fcitx5 as the Plasma virtual keyboard (System Settings -> Virtual
         # keyboard -> "Fcitx 5").
         waylandFrontend = true;
+        # Windows MS-Pinyin parity: tapping either Shift alone (within
+        # ModifierOnlyKeyTimeout) toggles between Chinese and English.
+        # fcitx5 serializes key lists as indexed entries in a dedicated
+        # section ([Hotkey/AltTriggerKeys] with 0=..., 1=...), NOT as a
+        # comma-joined value under [Hotkey] — that parses as an empty list.
+        settings.globalOptions."Hotkey/AltTriggerKeys" = {
+          "0" = "Shift_L";
+          "1" = "Shift_R";
+        };
         settings.inputMethod = {
           GroupOrder."0" = "Default";
           "Groups/0" = {
