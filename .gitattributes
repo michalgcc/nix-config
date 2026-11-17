@@ -1,0 +1,2 @@
+# A Windows clone checks text out as CRLF by default, which bash on Linux and WSL cannot run.
+*.sh text eol=lf
