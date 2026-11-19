@@ -16,7 +16,7 @@
     "nil": {
       "formatting": {
         "command": [
-          "nixpkgs-fmt"
+          "nixfmt"
         ]
       }
     }
@@ -24,9 +24,7 @@
   "security.workspace.trust.enabled": false,
   "terminal.integrated.gpuAcceleration": "on",
   "update.mode": "manual",
-  "vim.easymotion": true,
   "vim.smartRelativeLine": true,
   "vim.useCtrlKeys": false,
-  "window.titleBarStyle": "custom",
-  "haskell.manageHLS": "PATH"
+  "window.titleBarStyle": "custom"
 }

@@ -4,7 +4,6 @@
     #clang
     # # llvmPackages.bintools
     # rustup
-    ollama
     python3
     uv
   ];

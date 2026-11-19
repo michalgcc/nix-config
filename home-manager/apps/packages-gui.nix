@@ -4,7 +4,6 @@
     gimp
     jellyfin-media-player
     gparted
-    arduino-ide
     audacious
     popsicle
     chromium

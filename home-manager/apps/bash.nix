@@ -8,19 +8,15 @@
 
     # Prompt and jump tools. home-manager injects the bash
     # integration for each of these automatically when bash is enabled.
+    # Single prompt config shared with Windows: the same toml is manually
+    # deployed to ~/.config/starship.toml on the Git Bash box.
     starship = {
       enable = true;
-      settings = {
-        add_newline = true;
-        character = {
-          success_symbol = "[➜](bold green)";
-          error_symbol = "[➜](bold red)";
-        };
-      };
+      settings = builtins.fromTOML (builtins.readFile ../../shared-dotfiles/starship.toml);
     };
     zoxide.enable = true;
-    # fzf: FZF_* command variables are exported in bashrc.sh so Git Bash on
-    # Windows can share the same file; fzf widgets read them at runtime.
-    fzf.enable = true;
+    # skim: SKIM_* command variables are exported in bashrc.sh so Git Bash on
+    # Windows can share the same file; skim widgets read them at runtime.
+    skim.enable = true;
   };
 }

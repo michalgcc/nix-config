@@ -46,11 +46,11 @@ if [[ $- == *i* ]]; then
     bind '\C-w:unix-filename-rubout'
 fi
 
-# fzf: prefer fd over find (gitignore-aware, much faster on large trees).
+# skim: prefer fd over find (gitignore-aware, much faster on large trees).
 # Exported here rather than through home-manager so Git Bash gets them too.
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export SKIM_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export SKIM_CTRL_T_COMMAND="$SKIM_DEFAULT_COMMAND"
+export SKIM_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 
 # --- WSL ---
 
@@ -99,7 +99,6 @@ if [[ $PLATFORM == wsl ]]; then
     link_wsl_exe "git.exe" "git"
     link_wsl_exe "gitk.exe" "gitk"
     link_wsl_exe "rg.exe" "rg"
-    link_wsl_exe "lazygit.exe" "lazygit"
     PATH=$(echo "$PATH" | sed 's/:/\n/g' | grep -P '^(?!\/mnt\/c\/(?!.*scoop\/shims.*$|.*PowerShell.*$|.*VS.Code.*$)).*' | sed -z 's/\n/:/g;s/:$//')
 
     # Aliases are expanded when a function is defined, not when it runs, so
@@ -112,16 +111,63 @@ if [[ $PLATFORM == wsl ]]; then
     PROMPT_COMMAND='prepend_or_remove_wsl_mnt_override_path'
 fi
 
+# --- History ---
+
+# Write each command to the history file as soon as it has run, not only when
+# the shell exits. A killed shell (a closed Windows Terminal tab, a crash)
+# then loses nothing, and new shells see commands from ones still open.
+# Appended, so it keeps any hook set before it, and below the WSL block,
+# which assigns PROMPT_COMMAND outright. starship, zoxide and direnv, set up
+# after this, keep it and still see the right exit status.
+if [[ $- == *i* ]]; then
+    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}history -a"
+fi
+
 # --- Git Bash ---
 
-# No home-manager here to source the fzf, starship and zoxide integrations; on
+# No home-manager here to source the skim, starship and zoxide integrations; on
 # Linux and WSL it does that later in the generated bashrc.
-# Windows prerequisites: scoop install fzf fd starship zoxide
+# Git Bash already provides coreutils, grep/sed/awk/find, ssh and curl; the only
+# Windows prerequisites are:
+#   scoop install skim fd starship zoxide     # bashrc requirements
+#   scoop install yazi gitui                  # optional, matching the Nix side
+# VS Code's `code` is expected on PATH for the c() helper.
 if [[ $PLATFORM == gitbash && $- == *i* ]]; then
     # Git Bash defaults to a visible bell, which flashes the whole window
     bind 'set bell-style none'
 
-    command -v fzf >/dev/null && eval "$(fzf --bash)"
+    # Same history settings as home-manager generates on Linux and WSL
+    HISTSIZE=10000
+    HISTFILESIZE=100000
+    shopt -s histappend
+
+    # Git Bash does not count .bat, .cmd and .ps1 files as executable, so Tab
+    # on a command skips them. Offer them as well, next to the directories
+    # and executables bash would list anyway.
+    _complete_windows_scripts() {
+        local file
+        COMPREPLY=()
+        # Without a slash the command comes from PATH - leave that to bash
+        [[ $2 == */* ]] || return 0
+        while IFS= read -r file; do
+            case ${file,,} in
+            *.bat | *.cmd | *.ps1) COMPREPLY+=("$file") ;;
+            *) [[ -d $file || -x $file ]] && COMPREPLY+=("$file") ;;
+            esac
+        done < <(compgen -f -- "$2")
+
+        # .bat and .cmd run as they are, but bash cannot run a .ps1. Once one
+        # is the only match, complete it to "pwsh <script>". That is inserted
+        # as typed text, so it needs the quoting readline would have added.
+        if [[ ${#COMPREPLY[@]} == 1 && ${COMPREPLY[0],,} == *.ps1 ]]; then
+            compopt +o filenames
+            printf -v file '%q' "${COMPREPLY[0]}"
+            COMPREPLY=("pwsh $file")
+        fi
+    }
+    complete -I -o bashdefault -o filenames -F _complete_windows_scripts
+
+    command -v sk >/dev/null && source <(sk --shell bash --shell-bindings)
     command -v starship >/dev/null && eval "$(starship init bash)"
     command -v zoxide >/dev/null && eval "$(zoxide init bash)"
 fi
@@ -129,7 +175,7 @@ fi
 # --- Commands ---
 
 alias s='git status'
-alias lg='lazygit'
+alias gu='gitui'
 
 # opencode alias
 alias opencode="steam-run opencode"
@@ -220,11 +266,6 @@ search() {
 
 clipboard() {
     wl-copy
-}
-
-qransiencode() {
-    echo "Paste what you want to generate as QR and confirm with Enter + CTRL + D"
-    qrencode -t ansiutf8
 }
 
 unlock_remote_server_luks() {

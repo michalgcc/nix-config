@@ -113,6 +113,6 @@ if ($IsWindows) {
     }
 }
 
-function lg {
-    lazygit
+function gu {
+    gitui
 }

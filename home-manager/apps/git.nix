@@ -37,9 +37,7 @@
         # When running on WSL use git-credential-manager from scoop (scoop install git-credential-manager)
         # One time thing:
         # git config --global credential.helper "/mnt/c/Users/a/scoop/apps/git/current/mingw64/bin/git-credential-manager.exe"
-        core.editor = "vim";
-        diff.tool = "vimdiff";
-        difftool.prompt = false;
+        core.editor = "codium --wait";
         pull.rebase = false;
         merge.ff = "only";
         push.autoSetupRemote = true;

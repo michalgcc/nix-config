@@ -57,10 +57,17 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home-manager/home-gui.nix
-            {
-              mg.user.name = "zuja";
-              mg.git.enable = false;
-            }
+            (
+              { pkgs, ... }:
+              {
+                mg.user.name = "zuja";
+                mg.git.enable = false;
+
+                # Only the git binary, enough to pull config changes; mg.git
+                # stays off, keeping mg's identity and credentials away.
+                home.packages = [ pkgs.git ];
+              }
+            )
           ];
         };
       };
